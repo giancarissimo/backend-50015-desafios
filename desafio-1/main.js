@@ -50,7 +50,7 @@ class ProductManager {
     }
 }
 
-// Testing
+/* -------------------- Testing -------------------- */
 const manager = new ProductManager()
 
 manager.addProduct("Producto 1", "Descripción 1", 10.99, "imagen1.jpg", "CODE1", 20)

@@ -1,4 +1,4 @@
-const fs = require('fs').promises
+const fs = require('fs')
 
 class ProductManager {
     constructor(filePath) {
@@ -62,7 +62,7 @@ class ProductManager {
 
     async readFile() {
         try {
-            const data = await fs.readFile(this.path, 'utf8')
+            const data = fs.readFileSync(this.path, 'utf8')
             const arrayProducts = JSON.parse(data)
             return arrayProducts
         } catch (error) {
@@ -72,7 +72,7 @@ class ProductManager {
 
     async saveFile(arrayProducts) {
         try {
-            await fs.writeFile(this.path, JSON.stringify(arrayProducts, null, 4))
+            fs.writeFileSync(this.path, JSON.stringify(arrayProducts, null, 4))
         } catch (error) {
             console.log("Error al guardar el archivo", error)
         }

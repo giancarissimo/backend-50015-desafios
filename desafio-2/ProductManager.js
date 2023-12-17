@@ -114,75 +114,164 @@ class ProductManager {
 }
 
 /* -------------------- Testing -------------------- */
-const manager = new ProductManager('desafio-2/productos.json')
+async function testing() {
+    const manager = new ProductManager('desafio-2/products.json')
 
-// Se obtiene el array vacío.
-manager.getProducts()
+    // Se obtiene el array vacío.
+    console.log(manager.getProducts())
 
-// Se agregan 2 productos y se testea el id autoincrementable.
-manager.addProduct({
-    title: "Product 1",
-    description: "Description 1",
-    price: 10.99,
-    thumbnail: "image1.jpg",
-    code: "CODE1",
-    stock: 20
-})
+    // Se agregan 11 productos y se testea el id autoincrementable.
+    await manager.addProduct({
+        title: "Product 1",
+        description: "Description 1",
+        price: 10.00,
+        thumbnail: "image1.jpg",
+        code: "CODE1",
+        stock: 20
+    })
 
-manager.addProduct({
-    title: "Product 2",
-    description: "Description 2",
-    price: 20.99,
-    thumbnail: "image2.jpg",
-    code: "CODE2",
-    stock: 20
-})
+    await manager.addProduct({
+        title: "Product 2",
+        description: "Description 2",
+        price: 20.00,
+        thumbnail: "image2.jpg",
+        code: "CODE2",
+        stock: 20
+    })
 
-console.log("Todos los productos:", manager.getProducts())
+    await manager.addProduct({
+        title: "Product 3",
+        description: "Description 3",
+        price: 30.00,
+        thumbnail: "image3.jpg",
+        code: "CODE3",
+        stock: 20
+    })
 
-// Se testea que todos los campos sean obligatorios.
-manager.addProduct({
-    title: "Product 3",
-    // description: "Description 3",
-    price: 25.99,
-    thumbnail: "image3.jpg",
-    code: "CODE3",
-    stock: 20
-})
+    await manager.addProduct({
+        title: "Product 4",
+        description: "Description 4",
+        price: 40,
+        thumbnail: "image4.jpg",
+        code: "CODE4",
+        stock: 20
+    })
 
-// Se testea que el "code" no se repita en los productos.
-manager.addProduct({
-    title: "Product 4",
-    description: "Description 4",
-    price: 35.99,
-    thumbnail: "image3.jpg",
-    code: "CODE2",
-    stock: 20
-})
+    await manager.addProduct({
+        title: "Product 5",
+        description: "Description 5",
+        price: 50.00,
+        thumbnail: "image5.jpg",
+        code: "CODE5",
+        stock: 20
+    })
 
-// Se busca un producto por id
-async function testGetProductById() {
-    await manager.getProductById(2)
+    await manager.addProduct({
+        title: "Product 6",
+        description: "Description 6",
+        price: 60.00,
+        thumbnail: "image6.jpg",
+        code: "CODE6",
+        stock: 20
+    })
+
+    await manager.addProduct({
+        title: "Product 7",
+        description: "Description 7",
+        price: 70.00,
+        thumbnail: "image7.jpg",
+        code: "CODE7",
+        stock: 20
+    })
+
+    await manager.addProduct({
+        title: "Product 8",
+        description: "Description 8",
+        price: 80.00,
+        thumbnail: "image8.jpg",
+        code: "CODE8",
+        stock: 20
+    })
+
+    await manager.addProduct({
+        title: "Product 9",
+        description: "Description 9",
+        price: 90.00,
+        thumbnail: "image9.jpg",
+        code: "CODE9",
+        stock: 20
+    })
+
+    await manager.addProduct({
+        title: "Product 10",
+        description: "Description 10",
+        price: 100.00,
+        thumbnail: "image10.jpg",
+        code: "CODE10",
+        stock: 20
+    })
+
+    await manager.addProduct({
+        title: "Product 11",
+        description: "Description 11",
+        price: 110.99,
+        thumbnail: "image11.jpg",
+        code: "CODE11",
+        stock: 20
+    })
+
+    console.log("Todos los productos:", manager.getProducts());
+
+    // Se testea que todos los campos sean obligatorios.
+    await manager.addProduct({
+        title: "Product 12",
+        // description: "Description 12",
+        price: 121.99,
+        thumbnail: "image12.jpg",
+        code: "CODE12",
+        stock: 20
+    })
+
+    // Se testea que el "code" no se repita en los productos.
+    await manager.addProduct({
+        title: "Product 13",
+        description: "Description 13",
+        price: 132.99,
+        thumbnail: "image13.jpg",
+        code: "CODE1",
+        stock: 20
+    })
+
+    // Se busca un producto por id
+    try {
+        const product = await manager.getProductById(2)
+        console.log("Producto encontrado:", product)
+    } catch (error) {
+        console.error(error)
+    }
+
+    // Se actualiza un producto.
+    const product1New = {
+        id: 1,
+        title: "product 1 new",
+        description: "Description 1 new",
+        price: 10,
+        thumbnail: "image1New.jpg",
+        code: "CODE1",
+        stock: 20
+    }
+
+    try {
+        await manager.updateProduct(1, product1New)
+    } catch (error) {
+        console.error(error)
+    }
+
+    // Se elimina un producto
+    try {
+        await manager.deleteProduct(11)
+    } catch (error) {
+        console.error(error)
+    }
 }
-testGetProductById()
-
-// Se actualiza un producto.
-const product1New = {
-    title: "product 1 new",
-    description: "Description 1 new",
-    price: 10.99,
-    thumbnail: "image1New.jpg",
-    code: "CODE1",
-    stock: 20
-}
-
-async function testUpdateProduct() {
-    await manager.updateProduct(1, product1New)
-}
-testUpdateProduct()
-
-// Se elimina un producto
-async function testDeleteProduct() {
-    await manager.deleteProduct(2)
-}
-testDeleteProduct()
+testing()

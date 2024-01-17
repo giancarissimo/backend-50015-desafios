@@ -1,0 +1,27 @@
+<main>
+    <section class="sectionRealTimeProducts">
+        <h1>Productos Actualizados en Tiempo Real</h1>
+        <div id="containerRealTimeProductos"></div>
+    </section>
+    <section class="sectionForm">
+        <h2>Formulario para agregar productos </h2>
+        <div class="containerForm">
+            <form>
+                <input type="text" id="title" placeholder="Title">
+                <input type="text" id="description" placeholder="Description">
+                <input type="text" id="category" placeholder="Category">
+                <input type="number" id="price" placeholder="Price">
+                <input type="text" id="thumbnail" value="Sin Imagen">
+                <input type="text" id="code" placeholder="Code">
+                <input type="number" id="stock" placeholder="Stock">
+                <select id="status">
+                    <option value="true">Activo</option>
+                    <option value="false">Inactivo</option>
+                </select>
+                <button type="button" id="btnEnviar">Enviar</button>
+            </form>
+        </div>
+    </section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+<script src="/js/realTimeProducts.js"></script>

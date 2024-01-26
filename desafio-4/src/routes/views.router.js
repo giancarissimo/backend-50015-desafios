@@ -16,7 +16,7 @@ module.exports = (productManager) => {
     // Ruta para la vista realTimeProducts.handlebars
     router.get('/realtimeproducts', async (req, res) => {
         try {
-            res.render('realTimeProducts', { title: 'Real Time Products'})
+            res.render('realTimeProducts', { title: 'Real Time Products' })
         } catch (error) {
             console.error('Error getting products:', error)
             res.status(500).json({ error: 'Internal Server Error' })

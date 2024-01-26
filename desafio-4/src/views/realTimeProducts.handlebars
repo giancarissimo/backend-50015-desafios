@@ -1,24 +1,27 @@
 <main>
-    <section class="sectionRealTimeProducts">
-        <h1>Productos Actualizados en Tiempo Real</h1>
-        <div id="containerRealTimeProductos"></div>
+    <section class="section_realTimeProducts">
+        <div class="realTimeProducts_container_title">
+            <h1>Real time products</h1>
+        </div>
+        <div id="container_realTimeProducts"></div>
     </section>
-    <section class="sectionForm">
-        <h2>Formulario para agregar productos </h2>
-        <div class="containerForm">
-            <form>
+    <section class="section_form">
+        <h2 id="form_title">Add a product</h2>
+        <div class="container_form">
+            <form id="form_products">
                 <input type="text" id="title" placeholder="Title">
                 <input type="text" id="description" placeholder="Description">
                 <input type="text" id="category" placeholder="Category">
                 <input type="number" id="price" placeholder="Price">
-                <input type="text" id="thumbnail" value="Sin Imagen">
+                <input type="text" id="thumbnail" placeholder="Image">
                 <input type="text" id="code" placeholder="Code">
                 <input type="number" id="stock" placeholder="Stock">
                 <select id="status">
-                    <option value="true">Activo</option>
-                    <option value="false">Inactivo</option>
+                    <option value="true">Active</option>
+                    <option value="false">Inactive</option>
                 </select>
-                <button type="button" id="btnEnviar">Enviar</button>
+                <button type="button" id="form_submitBtn">Submit</button>
+                <button type="button" id="form_clearBtn">Clear</button>
             </form>
         </div>
     </section>

@@ -53,11 +53,11 @@ class ProductManager {
                 title,
                 description,
                 category,
-                price,
+                price: parseFloat(price),
                 thumbnail,
                 code,
-                stock,
-                status
+                stock: parseInt(stock),
+                status: JSON.parse(status) // para que retorne un booleano
             }
             this.products.push(newProduct)
             console.log("Product added:", newProduct)
@@ -78,9 +78,9 @@ class ProductManager {
         try {
             const foundProduct = this.products.find(item => item.id === id)
             if (!foundProduct) {
-                console.error("Product not found. ID:", id)
+                console.error(`A product with the id ${id} was not found.`)
             } else {
-                console.error("Product found:", foundProduct)
+                console.log("Product found:", foundProduct)
                 return foundProduct
             }
         } catch (error) {
@@ -98,7 +98,7 @@ class ProductManager {
                 await this.saveProducts(this.products)
                 console.log("Product updated:", updatedProduct)
             } else {
-                console.error("Product not found. ID:", id)
+                console.error(`A product with the id ${id} was not found.`)
             }
         } catch (error) {
             console.error("Error updating the product", error)
@@ -115,7 +115,7 @@ class ProductManager {
                 await this.saveProducts(this.products)
                 console.log("Product deleted:", deletedProduct)
             } else {
-                console.error("Product not found. ID:", id)
+                console.error(`A product with the id ${id} was not found.`)
             }
         } catch (error) {
             console.error("Error deleting the product", error)

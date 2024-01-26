@@ -50,7 +50,7 @@ class CartManager {
         try {
             const cart = this.carts.find(cart => cart.id === cartId)
             if (!cart) {
-                throw new Error(`No cart exists with the id ${cartId}`)
+                console.error(`No cart exists with the id ${cartId}`)
             }
             return cart
         } catch (error) {
@@ -61,16 +61,22 @@ class CartManager {
 
     async addProductToCart(cartId, productId, productManager, quantity = 1) {
         try {
+            // Se verifica si el carrito existe en el array de carritos
+            const cart = await this.getCartById(cartId)
+            if (!cart) {
+                console.error(`No cart exists with the id ${cartId}`)
+                return cartId
+            }
+
             // Se verifica si el producto existe en el array de productos
             const product = await productManager.getProductById(productId)
-
             if (!product) {
+                console.error(`A product with the id ${productId} was not found.`)
                 return productId
             }
 
-            const cart = await this.getCartById(cartId)
+            // Se verifica si el producto ya existe en el carrito.
             const productsExist = cart.products.find(p => p.product === productId)
-
             if (productsExist) {
                 productsExist.quantity += quantity
             } else {

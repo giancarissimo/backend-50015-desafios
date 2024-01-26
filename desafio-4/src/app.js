@@ -42,13 +42,20 @@ io.on('connection', async (socket) => {
     // Se emite la lista de productos al cliente cuando se conecta
     socket.emit("products", await productManager.getProducts())
 
-    // Se escucha eventos del cliente para agregar y borrar productos
+    // Se escucha eventos del cliente para agregar productos
     socket.on("addProduct", async (newProduct) => {
         // Se agrega el nuevo producto y emitir la lista actualizada a todos los clientes
         await productManager.addProduct(newProduct)
         io.emit("products", await productManager.getProducts())
     })
 
+    // Se escucha eventos del cliente para actualziar productos
+    socket.on("updateProduct", async ({ productId, updatedProduct }) => {
+        await productManager.updateProduct(productId, updatedProduct)
+        io.emit("products", await productManager.getProducts())
+    })
+
+    // Se escucha eventos del cliente para borrar productos
     socket.on("deleteProduct", async (productId) => {
         // Se borra el producto y emitir la lista actualizada a todos los clientes
         await productManager.deleteProduct(productId)

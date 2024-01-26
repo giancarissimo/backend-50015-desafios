@@ -10,7 +10,7 @@ module.exports = (productManager) => {
             res.json(products)
         } catch (error) {
             console.error("Error getting the products", error)
-            res.status(500).json({ error: 'Internal Server Error' })
+            res.status(500).json({ error: `Internal Server Error.` })
         }
     })
 
@@ -19,14 +19,14 @@ module.exports = (productManager) => {
         try {
             const productId = parseInt(req.params.pid)
             const product = await productManager.getProductById(productId)
-            if (product) {
-                res.json(product)
+            if (!product) {
+                res.status(400).json({ error: `A product with the id ${productId} was not found.` })
             } else {
-                res.status(404).json({ error: 'Product not found' })
+                res.json({ message: "Product found:", product })
             }
         } catch (error) {
             console.error("Error getting the product", error)
-            res.status(500).json({ error: 'Internal Server Error' })
+            res.status(500).json({ error: `Internal Server Error.` })
         }
     })
 
@@ -34,11 +34,25 @@ module.exports = (productManager) => {
     router.post('/', async (req, res) => {
         try {
             const newProduct = req.body
+            const requiredFields = ["title", "description", "category", "price", "thumbnail", "code", "stock"]
+            const missingFields = requiredFields.filter(field => !(field in newProduct) || (typeof newProduct[field] === "string" && newProduct[field].trim() === ""))
+
+            if (missingFields.length > 0) {
+                return res.status(400).json({ message: "All fields are mandatory." })
+            }
+
+            const products = await productManager.getProducts()
+            const existingProduct = products.find(product => product.code === newProduct.code)
+
+            if (existingProduct) {
+                return res.status(400).json({ message: "A product with that code already exists." })
+            }
+
             await productManager.addProduct(newProduct)
-            res.json({ message: 'Product added successfully' })
+            res.json({ message: "Product added successfully", newProduct })
         } catch (error) {
             console.error("Error adding the product", error)
-            res.status(500).json({ error: 'Internal Server Error' })
+            res.status(500).json({ error: `Internal Server Error.` })
         }
     })
 
@@ -47,11 +61,15 @@ module.exports = (productManager) => {
         try {
             const productId = parseInt(req.params.pid)
             const updatedProduct = req.body
-            await productManager.updateProduct(productId, updatedProduct)
-            res.json({ message: 'Product updated successfully' })
+            const productToUpdate = await productManager.updateProduct(productId, updatedProduct)
+            if (!productToUpdate) {
+                return res.status(400).json({ error: `A product with the id ${productId} was not found.` })
+            } else {
+                return res.json({ message: "Product updated successfully:", updatedProduct })
+            }
         } catch (error) {
             console.error("Error updating the product", error)
-            res.status(500).json({ error: 'Internal Server Error' })
+            res.status(500).json({ error: `Internal Server Error.` })
         }
     })
 
@@ -59,11 +77,15 @@ module.exports = (productManager) => {
     router.delete('/:pid', async (req, res) => {
         try {
             const productId = parseInt(req.params.pid)
-            await productManager.deleteProduct(productId)
-            res.json({ message: 'Product deleted successfully' })
+            const productToDelete = await productManager.deleteProduct(productId)
+            if (!productToDelete) {
+                return res.status(400).json({ error: `A Product with the id ${productId} was not found.` })
+            } else {
+                return res.json({ message: "Product deleted successfully:", productToDelete })
+            }
         } catch (error) {
             console.error("Error deleting the product", error)
-            res.status(500).json({ error: 'Internal Server Error' })
+            res.status(500).json({ error: `Internal Server Error.` })
         }
     })
 

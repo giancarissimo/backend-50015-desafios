@@ -18,7 +18,11 @@ module.exports = (cartManager, productManager) => {
         const cartId = parseInt(req.params.cid)
         try {
             const cart = await cartManager.getCartById(cartId)
-            res.json(cart.products)
+            if (!cart) {
+                res.status(400).json({ error: `No cart exists with the id ${cartId}` })
+            } else {
+                res.json(cart.products)
+            }
         } catch (error) {
             console.error("Error retrieving the cart", error)
             res.status(500).json({ error: 'Internal Server Error' })
@@ -31,6 +35,20 @@ module.exports = (cartManager, productManager) => {
         const productId = parseInt(req.params.pid)
         const quantity = req.body.quantity || 1
         try {
+            // Se verifica si el carrito existe en el array de carritos
+            const verifyCartId = await cartManager.getCartById(cartId)
+            if(!verifyCartId){
+                res.status(400).json({ error: `No cart exists with the id ${cartId}` })
+                return cartId
+            }
+
+            // Se verifica si el producto existe en el array de productos
+            const verifyProductId = await productManager.getProductById(productId)
+            if (!verifyProductId) {
+                res.status(400).json({ error: `A product with the id ${productId} was not found.` })
+                return productId
+            }
+
             const updateCart = await cartManager.addProductToCart(cartId, productId, productManager, quantity)
             res.json(updateCart.products)
         } catch (error) {

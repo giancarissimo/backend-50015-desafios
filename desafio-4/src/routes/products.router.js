@@ -19,11 +19,13 @@ module.exports = (productManager) => {
         try {
             const productId = parseInt(req.params.pid)
             const product = await productManager.getProductById(productId)
+
             if (!product) {
                 res.status(400).json({ error: `A product with the id ${productId} was not found.` })
             } else {
                 res.json({ message: "Product found:", product })
             }
+
         } catch (error) {
             console.error("Error getting the product", error)
             res.status(500).json({ error: `Internal Server Error.` })
@@ -34,7 +36,7 @@ module.exports = (productManager) => {
     router.post('/', async (req, res) => {
         try {
             const newProduct = req.body
-            const requiredFields = ["title", "description", "category", "price", "thumbnail", "code", "stock"]
+            const requiredFields = ["title", "description", "category", "price", "thumbnail", "code", "stock", "status"]
             const missingFields = requiredFields.filter(field => !(field in newProduct) || (typeof newProduct[field] === "string" && newProduct[field].trim() === ""))
 
             if (missingFields.length > 0) {
@@ -61,12 +63,15 @@ module.exports = (productManager) => {
         try {
             const productId = parseInt(req.params.pid)
             const updatedProduct = req.body
-            const productToUpdate = await productManager.updateProduct(productId, updatedProduct)
-            if (!productToUpdate) {
-                return res.status(400).json({ error: `A product with the id ${productId} was not found.` })
-            } else {
+            const productIdToVerify = await productManager.getProductById(productId)
+
+            if (productIdToVerify) {
+                await productManager.updateProduct(productId, updatedProduct)
                 return res.json({ message: "Product updated successfully:", updatedProduct })
+            } else {
+                return res.status(400).json({ error: `A product with the id ${productId} was not found.` })
             }
+
         } catch (error) {
             console.error("Error updating the product", error)
             res.status(500).json({ error: `Internal Server Error.` })
@@ -77,12 +82,15 @@ module.exports = (productManager) => {
     router.delete('/:pid', async (req, res) => {
         try {
             const productId = parseInt(req.params.pid)
-            const productToDelete = await productManager.deleteProduct(productId)
-            if (!productToDelete) {
-                return res.status(400).json({ error: `A Product with the id ${productId} was not found.` })
-            } else {
+            const productIdToVerify = await productManager.getProductById(productId)
+
+            if (productIdToVerify) {
+                const productToDelete = await productManager.deleteProduct(productId)
                 return res.json({ message: "Product deleted successfully:", productToDelete })
+            } else {
+                return res.status(400).json({ error: `A Product with the id ${productId} was not found.` })
             }
+
         } catch (error) {
             console.error("Error deleting the product", error)
             res.status(500).json({ error: `Internal Server Error.` })

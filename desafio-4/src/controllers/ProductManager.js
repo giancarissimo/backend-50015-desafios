@@ -36,7 +36,7 @@ class ProductManager {
             let { title, description, category, price, thumbnail, code, stock, status } = newObject
 
             // Se valida que todos los campos sean obligatorios
-            if (!title || !description || !category || !price || !thumbnail || !code || !stock || !status) {
+            if (!title || !description || !category || !price || !thumbnail || !code || !stock || status == undefined || status == null) {
                 console.error("All fields are mandatory.")
                 return
             }

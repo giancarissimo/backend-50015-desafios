@@ -20,30 +20,31 @@ Formato de entrega:
     * Link al repositorio de Github, el cual debe contar con todo el proyecto.
     * No incluir node_modules
 
+    /node_modules
     /src
     |__/controllers
-    |               |__CartManager.js
-    |               |__ProductManager.js
+    |       |__CartManager.js
+    |       |__ProductManager.js
     |__/models
-    |            |__carts.json
-    |            |__products.json
+    |      |__carts.json
+    |      |__products.json
     |__/routes
-    |           |__cart.router.js
-    |           |__products.router.js
-    |           |__views.router.js
+    |      |__cart.router.js
+    |      |__products.router.js
+    |      |__views.router.js
     |__/views
-                |__layouts
-                    |__main.handlebars
-    |           |__home.handlebars
-    |           |__realTimeProducts.handlebars
+    |      |__/layouts
+    |            |__main.handlebars
+    |      |__home.handlebars
+    |      |__realTimeProducts.handlebars
     |__/public
-    |           |__/css
-                    |_style.css
-    |           |__/js
-                    |__index.js
+    |      |__/css
+    |           |__style.css
+    |      |__/js
+    |           |__realTimeProducts.js
+    |      |__/jsons
+    |            |__productsForm-inputs.json
     |__app.js
-    |__.gitignore
-    |__package-lock.json
-    |__package.json
-
-
+    .gitignore
+    package-lock.json
+    package.json

@@ -1,0 +1,29 @@
+<main>
+    <div class="background_modal"></div>
+    <div class="navbar_promos">
+        <p>Enhance your admin experience managing products, updating details, and streamlining your workflow.</p>
+    </div>
+    <section class="section_realTimeProducts">
+        <div class="realTimeProducts_container_title">
+            <h1>Real Time Products. <span>Explore and manage <br>your entire store inventory.</span></h1>
+        </div>
+        <div id="container_realTimeProducts"></div>
+        <div id="scrolledToForm"></div>
+    </section>
+    <section class="section_form">
+        <form id="form_products">
+            <h2 id="form_title">Add a product</h2>
+            <div class="container_formInputs"></div>
+            <div id="status"></div>
+            <div class="container_formBtns">
+                <button type="button" id="form_clearBtn">Clear & Reset</button>
+                <button type="button" id="form_submitBtn">Submit</button>
+            </div>
+            <div class="container_formBnt-delete"></div>
+            <div class="container_modal"></div>
+        </form>
+    </section>
+</main>
+{{>footer}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+<script src="/js/realTimeProducts.js"></script>

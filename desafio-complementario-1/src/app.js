@@ -76,7 +76,7 @@ io.on('connection', async (socket) => {
         // Guardo el mensaje en MongoDB
         await MessageModel.create(data)
 
-        // Obtengo los mensajes de MongoDB y se los paso al cliente:
+        // Obtengo los mensajes de MongoDB y se los paso al cliente
         const messages = await MessageModel.find()
         console.log(messages)
         io.sockets.emit("message", messages)

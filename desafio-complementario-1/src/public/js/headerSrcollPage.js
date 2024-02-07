@@ -1,18 +1,18 @@
 let isHeaderActive = false
 
 const handleThemes = () => {
-    const lightModeBtn = document.getElementById('themeChanger_light')
-    const darkModeBtn = document.getElementById('themeChanger_dark')
-    const autoModeBtn = document.getElementById('themeChanger_auto')
+    const lightModeBtn = document.querySelectorAll('#themeChanger_light')
+    const darkModeBtn = document.querySelectorAll('#themeChanger_dark')
+    const autoModeBtn = document.querySelectorAll('#themeChanger_auto')
 
     // Obtener el estado actual del tema desde el localStorage
     const currentTheme = localStorage.getItem('theme') || 'auto'
     setTheme(currentTheme)
 
     // Asignar manejadores de eventos
-    lightModeBtn.addEventListener('click', () => setTheme('light'))
-    darkModeBtn.addEventListener('click', () => setTheme('dark'))
-    autoModeBtn.addEventListener('click', () => setTheme('auto'))
+    lightModeBtn.forEach((e) => { e.addEventListener('click', () => setTheme('light')) })
+    darkModeBtn.forEach((e) => { e.addEventListener('click', () => setTheme('dark')) })
+    autoModeBtn.forEach((e) => { e.addEventListener('click', () => setTheme('auto')) })
 
     function setTheme(theme) {
         // Guardar el tema actual en el localStorage
@@ -23,14 +23,14 @@ const handleThemes = () => {
             // Configurar el tema automáticamente según las preferencias del sistema/navegador
             const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
             document.documentElement.setAttribute('data-theme', prefersDarkMode ? 'dark' : 'light')
-            autoModeBtn.classList.add('selected')
-            lightModeBtn.classList.remove('selected')
-            darkModeBtn.classList.remove('selected')
+            autoModeBtn.forEach((e) => { e.classList.add('selected') })
+            lightModeBtn.forEach((e) => { e.classList.remove('selected') })
+            darkModeBtn.forEach((e) => { e.classList.remove('selected') })
         } else {
             document.documentElement.setAttribute('data-theme', theme)
-            autoModeBtn.classList.remove('selected')
-            lightModeBtn.classList.toggle('selected', theme === 'light')
-            darkModeBtn.classList.toggle('selected', theme === 'dark')
+            autoModeBtn.forEach((e) => { e.classList.remove('selected') })
+            lightModeBtn.forEach((e) => { e.classList.toggle('selected', theme === 'light') })
+            darkModeBtn.forEach((e) => { e.classList.toggle('selected', theme === 'dark') })
         }
     }
 }
@@ -42,7 +42,7 @@ const createHeaderPage = () => {
     <div class="headerPage">
         <h3 class="headerPage_title">${pageTitle}</h3>
         <div class="headerPage_buttons">
-            ${pageTitle === 'Community Chat' ? '<a href="http://localhost:8080/"><button class="logOut_btn" type="button">Log Out</button></a>' : '<a href="#header_global"><button class="goUp_btn" type="button" id="headerPage_goUpbtn">Go Up</button></a>'}
+            ${pageTitle === 'Community Chat' ? '' : '<a href="#header_global"><button class="goUp_btn" type="button" id="headerPage_goUpbtn">Go Up</button></a>'}
             <div class="themeChanger_container" >
                 <button class="themeChanger" id="themeChanger_light" type="button">Light</button>
                 <button class="themeChanger" id="themeChanger_dark" type="button">Dark</button>
@@ -64,12 +64,6 @@ const pageTitle = document.title
 
 if (pageTitle === 'Community Chat') {
     createHeaderPage()
-    // Se agrega el evento para que desplace smooth hasta el header
-    // document.getElementById("headerPage_goUpbtn").addEventListener("click", (event) => {
-    //     event.preventDefault()
-    //     // Desplazamiento suave hacia el formulario
-    //     document.getElementById("header_global").scrollIntoView({ behavior: 'smooth' })
-    // })
 } else {
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY

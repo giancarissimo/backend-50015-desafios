@@ -49,7 +49,7 @@ module.exports = (cartManager, productManager) => {
                 return productId
             }
 
-            const updateCart = await cartManager.addProductToCart(cartId, productId, productManager, quantity)
+            const updateCart = await cartManager.addProductToCart(cartId, productId, quantity, productManager)
             res.json(updateCart.products)
         } catch (error) {
             console.error("Error adding a product to the cart", error)

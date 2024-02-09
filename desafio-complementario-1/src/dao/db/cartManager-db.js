@@ -42,7 +42,7 @@ class CartManager {
             }
 
             // Se verifica si el producto ya existe en el carrito y, sino, se agrega.
-            const productExist = cart.products.find(p => p.product === productId)
+            const productExist = cart.products.find(p => p.product.equals(productId))
             if (productExist) {
                 productExist.quantity += quantity
             } else {

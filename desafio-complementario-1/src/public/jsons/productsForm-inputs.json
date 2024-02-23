@@ -40,9 +40,9 @@
             "input" : "productsForm_input",
             "span" : "productsForm_input_placeholder"
         },
-        "id": "thumbnail",
+        "id": "thumbnails",
         "type": "text",
-        "text": "Thumbnail"
+        "text": "Thumbnails"
     },
     {
         "class" : {

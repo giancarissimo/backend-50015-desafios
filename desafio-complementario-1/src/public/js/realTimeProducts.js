@@ -16,7 +16,7 @@ const renderProducts = (products) => {
         productCard.innerHTML = `
             ${product.status ? '<span class="productCard_available">AVAILABLE</span>' : '<span class="productCard_notAvailable">NOT AVAILABLE</span>'}
             <h3>${product.title}</h3>
-            <img class="productCard_img" src = "../assets/images/store/${product.thumbnail}" alt="${product.title}"></img>
+            <img class="productCard_img" src = "../assets/images/store/${product.thumbnails}" alt="${product.title}"></img>
             <div class="productCard_info">
                 <div class="productCard_info_text">
                     <h4>From $${parseFloat(product.price).toFixed(2)}</h4>

@@ -41,6 +41,12 @@ class CartManager {
                 return productId
             }
 
+            // Se verifica que la cantidad sea un número positivo
+            if (typeof quantity !== 'number' || quantity <= 0) {
+                console.error(`Quantity (${quantity}) must be a positive number.`)
+                return quantity
+            }
+
             // Se verifica si el producto ya existe en el carrito y, sino, se agrega.
             const productExist = cart.products.find(p => p.product.equals(productId))
             if (productExist) {

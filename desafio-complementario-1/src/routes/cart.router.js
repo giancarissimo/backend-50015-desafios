@@ -19,7 +19,7 @@ module.exports = (cartManager, productManager) => {
         try {
             const cart = await cartManager.getCartById(cartId)
             if (!cart) {
-                res.status(400).json({ error: `No cart exists with the id ${cartId}` })
+                res.status(404).json({ error: `No cart exists with the id ${cartId}` })
             } else {
                 res.json(cart.products)
             }
@@ -37,16 +37,22 @@ module.exports = (cartManager, productManager) => {
         try {
             // Se verifica si el carrito existe en el array de carritos
             const verifyCartId = await cartManager.getCartById(cartId)
-            if(!verifyCartId){
-                res.status(400).json({ error: `No cart exists with the id ${cartId}` })
+            if (!verifyCartId) {
+                res.status(404).json({ error: `No cart exists with the id ${cartId}` })
                 return cartId
             }
 
             // Se verifica si el producto existe en el array de productos
             const verifyProductId = await productManager.getProductById(productId)
             if (!verifyProductId) {
-                res.status(400).json({ error: `A product with the id ${productId} was not found.` })
+                res.status(404).json({ error: `A product with the id ${productId} was not found.` })
                 return productId
+            }
+
+            // Se verifica que la cantidad sea un número positivo
+            if (typeof quantity !== 'number' || quantity <= 0) {
+                res.status(404).json({ error: `Quantity (${quantity}) must be a positive number.` })
+                return quantity
             }
 
             const updateCart = await cartManager.addProductToCart(cartId, productId, quantity, productManager)

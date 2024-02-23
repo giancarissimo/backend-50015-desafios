@@ -1,10 +1,10 @@
 const ProductModel = require("../models/products.model.js")
 
 class ProductManager {
-    async addProduct({ title, description, category, price, thumbnail, code, stock, status, thumbnails }) {
+    async addProduct({ title, description, category, price, code, stock, status, thumbnails }) {
         try {
             // Se valida que todos los campos sean obligatorios
-            if (!title || !description || !category || !price ||!thumbnail || !code || !stock || status == undefined || status == null) {
+            if (!title || !description || !category || !price || !code || !stock || status == undefined || status == null) {
                 console.log("All fields are mandatory.")
                 return
             }
@@ -22,7 +22,6 @@ class ProductManager {
                 description,
                 category,
                 price,
-                thumbnail,
                 code,
                 stock,
                 status,

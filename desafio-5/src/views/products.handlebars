@@ -1,0 +1,27 @@
+<section class="section_products">
+    <span>Wellcome {{user.first_name}} {{user.last_name}}</span>
+    <h1>Products List</h1>
+    <ul>
+        {{#each products }}
+        <div class="product_container">
+            <li> {{this.title}} </li>
+            <button class="button_detail" type="button"><a href="http://localhost:8080/products/{{this._id}}">buy</a></button>
+        </div>
+        {{/each}}
+    </ul>
+    <div class="prev-netxPage_buttons">
+        {{#unless hasPrevPage}}
+        <span class="prev_page_notEnabled">Back</span>
+        {{/unless}}
+        {{#if hasPrevPage}}
+        <a href="/products?page={{prevPage}}">Back</a>
+        {{/if}}
+        <p>Page {{currentPage}} of {{totalPages}}</p>
+        {{#if hasNextPage}}
+        <a href="/products?page={{nextPage}}">Next</a>
+        {{/if}}
+        {{#unless hasNextPage}}
+        <span class="prev_page_notEnabled">Next</span>
+        {{/unless}}
+    </div>
+</section>

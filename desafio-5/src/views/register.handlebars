@@ -1,18 +1,38 @@
-<form action="/api/users" method="post">
-    <label for="first_name">First Name:</label>
-    <input type="text" id="first_name" name="first_name" required>
-    <br>
-    <label for="last_name">Last Name:</label>
-    <input type="text" id="last_name" name="last_name" required>
-    <br>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <br>
-    <label for="age">Age:</label>
-    <input type="number" id="age" name="age" required>
-    <br>
-    <button type="submit">Register</button>
-</form>
+<section class="section_register">
+    <div class="register_container">
+        <div class="registerTitle_container">
+            <h1>Create your iStore Account</h1>
+        </div>
+        <form action="/api/users" method="post">
+            <div class="input_container">
+                <input class="input" id="username" type="text" name="username" placeholder="" autoComplete="off"
+                    required>
+                <span class="input_placeholder">Username</span>
+            </div>
+            <div class="input_container">
+                <input class="input" id="first_name" type="text" name="first_name" placeholder="" autoComplete="off"
+                    required>
+                <span class="input_placeholder">First Name</span>
+            </div>
+            <div class="input_container">
+                <input class="input" id="last_name" type="text" name="last_name" placeholder="" autoComplete="off"
+                    required>
+                <span class="input_placeholder">Last Name</span>
+            </div>
+            <div class="input_container">
+                <input class="input" id="email" type="email" name="email" placeholder="" autoComplete="off" required>
+                <span class="input_placeholder">Email Address</span>
+            </div>
+            <div class="input_container">
+                <input class="input" id="password" type="password" name="password" placeholder="" autoComplete="off"
+                    required>
+                <span class="input_placeholder">Password</span>
+            </div>
+            <div class="input_container">
+                <input class="input" id="age" type="number" name="age" placeholder="" autoComplete="off" required>
+                <span class="input_placeholder">Age</span>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</section>

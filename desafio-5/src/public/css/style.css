@@ -228,7 +228,7 @@ header {
 }
 
 .header_icons {
-    width: 9.5rem;
+    width: 16rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -238,6 +238,8 @@ header {
 .header_logo a,
 .header_icons_search,
 .header_icons_bag,
+.header_icons_account,
+.header_icons_account a,
 .header_icons_hamburguer {
     width: 3rem;
     height: 4.4rem;
@@ -248,14 +250,21 @@ header {
 
 .header_logo svg,
 .header_icons_search,
+.header_icons_account a,
 .header_icons_bag div {
     cursor: pointer;
     fill: var(--clr-header-font);
     /* transition: all .3s ease; */
 }
 
+.header_icons_account svg {
+    width: 3rem;
+    height: 3rem;
+}
+
 .header_logo svg:hover,
 .header_icons_search:hover,
+.header_icons_account a:hover,
 .header_icons_bag div:hover {
     fill: var(--clr-font);
 }
@@ -517,7 +526,7 @@ header {
 
 .productsForm_input,
 .statusOption,
-.loginInput {
+.input {
     width: 100%;
     height: 5.6rem;
     background-color: var(--clr-form-input);
@@ -543,14 +552,14 @@ header {
 }
 
 .productsForm_input:focus,
-.loginInput:focus,
+.input:focus,
 .productsForm_input:focus-within,
-.loginInput:focus-within {
+.input:focus-within {
     border: .2rem solid var(--clr-blue);
 }
 
 .productsForm_input_placeholder,
-.loginInput_placeholder {
+.input_placeholder {
     height: 1.6rem;
     position: absolute;
     margin: 0rem 0rem 0rem 1.2rem;
@@ -565,9 +574,9 @@ header {
 .productsForm_input:focus+.productsForm_input_placeholder,
 .productsForm_input:focus-within+.productsForm_input_placeholder,
 .productsForm_input:not(:placeholder-shown)+.productsForm_input_placeholder,
-.loginInput:focus+.loginInput_placeholder,
-.loginInput:focus-within+.loginInput_placeholder,
-.loginInput:not(:placeholder-shown)+.loginInput_placeholder {
+.input:focus+.input_placeholder,
+.input:focus-within+.input_placeholder,
+.input:not(:placeholder-shown)+.input_placeholder {
     font-size: 1.3rem;
     margin: -2.7rem 0rem 0rem 1.2rem;
 }
@@ -980,14 +989,14 @@ footer span {
     align-items: center;
 }
 
-.loginInput_container {
+.input_container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
 }
 
-.loginInput {
+.input {
     width: 48rem;
     height: 5.6rem;
     background-color: var(--clr-form-input);
@@ -1348,9 +1357,15 @@ footer span {
     gap: 1rem;
 }
 
-/* -------------------- Login -------------------- */
+/* -------------------- Login & Register -------------------- */
 
-.section_login {
+.section_login,
+.section_register,
+.section_profile {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1358,20 +1373,33 @@ footer span {
     gap: 1.5rem;
 }
 
-.login_container {
-    width: 30rem;
-    height: 35rem;
+.login_container,
+.register_container {
+    overflow: hidden;
+    width: auto;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 1rem;
+    gap: 2rem;
     background-color: var(--clr-white);
     box-shadow: .1rem .1rem 1rem rgba(0, 0, 0, 0.3);
     border-radius: 1rem;
+    padding: 3rem;
 }
 
-.login_container form {
+.login_container h1,
+.register_container h1 {
+    font-family: 'sf pro display';
+    font-size: 3rem;
+}
+
+.login_container span {
+    font-size: 1.7rem;
+}
+
+.login_container form,
+.register_container form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1379,8 +1407,10 @@ footer span {
     gap: 1rem;
 }
 
-.login_container form button {
+.login_container form button,
+.register_container form button {
     width: 100%;
+    height: 5.6rem;
     color: var(--clr-white);
     border-radius: 1rem;
     background-color: var(--clr-blue);
@@ -1394,5 +1424,27 @@ footer span {
 .login_registerOption span a {
     font-size: 1.5rem;
     color: var(--clr-blue);
+}
+
+.login_registerOption span a:hover {
+    text-decoration: underline;
+}
+
+/* -------------------- Profile -------------------- */
+
+.section_profile {
+    align-items: flex-start;
+}
+
+.section_profile h1 {
+    font-family: 'sf pro display';
+    font-size: 3rem;
+}
+
+.section_profile a {
+    color: var(--clr-blue);
+}
+
+.section_profile a:hover {
     text-decoration: underline;
 }

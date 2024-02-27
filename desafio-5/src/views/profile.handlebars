@@ -1,6 +1,13 @@
-<h1>My Profile</h1>
-<p>Welcome!, {{user.first_name}} {{user.last_name}}!</p>
-<p>Email: {{user.email}}</p>
-<p>Age: {{user.age}}</p>
-<p>Role: {{user.role}}</p>
-<a href="/api/sessions/logout">Logout</a>
+{{> header}}
+{{>headerScrolledPage}}
+<main>
+    <section class="section_profile">
+        <h1>Hi, {{user.username}}!</h1>
+        <span>First Name: {{user.first_name}}</span>
+        <span>Last Name: {{user.last_name}}</span>
+        <span>Email address: {{user.email}}</span>
+        <span>Age: {{user.age}}</span>
+        <span>Role: {{user.role}}</span>
+        <a href="/api/sessions/logout">Logout</a>
+    </section>
+</main>

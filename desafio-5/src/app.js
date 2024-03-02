@@ -46,21 +46,18 @@ app.set("views", "./src/views")
 
 // Routing
 app.use("/", require("./routes/views.router")(productManager, cartManager))
-
-// Rutas de productos
-app.use('/api/products', require('./routes/products.router')(productManager))
-
-// Rutas de carritos
-app.use('/api/carts', require('./routes/cart.router')(cartManager, productManager))
-
-// Rutas de usuarios
-app.use('/api/users', require('./routes/users.router'))
-
-// Rutas de sessions
-app.use('/api/sessions', require('./routes/sessions.router'))
+app.use('/api/products', require('./routes/products.router')(productManager)) // Rutas de productos
+app.use('/api/carts', require('./routes/cart.router')(cartManager, productManager)) // Rutas de carritos
+app.use('/api/users', require('./routes/users.router')) // Rutas de usuarios
+app.use('/api/sessions', require('./routes/sessions.router')) // Rutas de sessions
 
 // Servir archivos estáticos desde la carpeta 'public'
 app.use(express.static('./src/public'))
+
+// Configuración de manejo de errores 404 - Página no encontrada
+app.use((req, res, next) => {
+    res.status(404).render('notFound', { title: 'Page Not Found' })
+})
 
 // Se configura Socket.IO para escuchar conexiones
 io.on('connection', async (socket) => {

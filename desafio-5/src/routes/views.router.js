@@ -6,7 +6,7 @@ module.exports = (productManager, cartManager) => {
     // Ruta para la vista home.handlebars
     router.get('/', async (req, res) => {
         try {
-            if(!req.session.login) {
+            if (!req.session.login) {
                 return res.redirect('/login')
             }
             const products = await productManager.getProducts() // Se obtiene la lista de productos
@@ -103,7 +103,10 @@ module.exports = (productManager, cartManager) => {
         if (req.session.login) {
             return res.redirect('/products')
         }
-        res.render('login', { title: 'Login' })
+        // Verificar si hay errores en la sesión
+        const errors = req.session.errors || []
+        delete req.session.errors // Eliminar los errores de la sesión después de usarlos
+        res.render('login', { title: 'Login', errors })
     })
 
     // Ruta para la vista register.handlebars

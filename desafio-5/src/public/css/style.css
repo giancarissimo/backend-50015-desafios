@@ -228,7 +228,7 @@ header {
 }
 
 .header_icons {
-    width: 16rem;
+    width: 15rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1361,7 +1361,9 @@ footer span {
 
 .section_login,
 .section_register,
-.section_profile {
+.section_profile,
+.section_registerSuccess,
+.section_notFound {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1394,7 +1396,7 @@ footer span {
     font-size: 3rem;
 }
 
-.login_container span {
+.loginTitle_container span {
     font-size: 1.7rem;
 }
 
@@ -1415,6 +1417,23 @@ footer span {
     border-radius: 1rem;
     background-color: var(--clr-blue);
     padding: .6rem;
+    margin: .5rem 0rem 0rem 0rem;
+}
+
+.show_password_container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: .5rem 0rem;
+}
+
+.show_password_container input {
+    width: 1.6rem;
+    height: 1.6rem;
+}
+
+.show_password_container label {
+    font-size: 1.5rem;
 }
 
 .login_registerOption span {
@@ -1428,6 +1447,84 @@ footer span {
 
 .login_registerOption span a:hover {
     text-decoration: underline;
+}
+
+.input_container_total {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.input_error {
+    font-family: 'sf pro display';
+    color: var(--clr-red);
+    font-size: 1.5rem;
+}
+
+.input_iconError {
+    width: 2.5rem;
+    height: 2.5rem;
+    position: absolute;
+    margin: 0rem 0rem 0rem 44rem;
+}
+
+.input_iconError img{
+    width: inherit;
+    height: inherit;
+}
+
+/* -------------------- Register Success -------------------- */
+
+.registerSuccess_container {
+    width: auto;
+    height: 36rem;
+    border-radius: 1rem;
+    background-color: var(--clr-white);
+    box-shadow: .1rem .1rem 1rem rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.registerSuccess {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--clr-blue);
+    border-radius: 1rem 1rem 0rem 0rem;
+}
+
+.registerSuccess svg {
+    width: 8rem;
+    height: 8rem;
+}
+
+.registerSuccess svg rect {
+    fill:var(--clr-white);
+}
+
+.registerSuccess h1 {
+    font-family: 'sf pro display';
+    font-size: 2.4rem;
+    color: var(--clr-white);
+}
+
+.registerSuccess_message {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    padding: 3rem;
+}
+
+.registerSuccess_message button {
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--clr-blue);
+    color: var(--clr-white);
 }
 
 /* -------------------- Profile -------------------- */
@@ -1446,5 +1543,21 @@ footer span {
 }
 
 .section_profile a:hover {
+    text-decoration: underline;
+}
+
+/* -------------------- Not Found Page -------------------- */
+
+.section_notFound h1 {
+    font-family: 'sf pro display';
+    font-size: 5rem;
+    text-align: center;
+}
+
+.section_notFound a {
+    color: var(--clr-blue);
+}
+
+.section_notFound a:hover {
     text-decoration: underline;
 }

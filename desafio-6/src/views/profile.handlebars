@@ -1,0 +1,17 @@
+{{> header}}
+{{>headerScrolledPage}}
+<main>
+    <section class="section_profile">
+        <h1>Hi, {{user.username}}!</h1>
+        <span>First Name: {{user.first_name}}</span>
+        {{#if user.last_name}}
+        <span>Last Name: {{user.last_name}}</span>
+        {{/if}}
+        <span>Email address: {{user.email}}</span>
+        {{#if user.age}}
+        <span>Age: {{user.age}}</span>
+        {{/if}}
+        <span>Role: {{user.role}}</span>
+        <a href="/api/sessions/logout">Logout</a>
+    </section>
+</main>

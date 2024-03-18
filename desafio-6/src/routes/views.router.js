@@ -6,9 +6,9 @@ module.exports = (productManager, cartManager) => {
     // Ruta para la vista home.handlebars
     router.get('/', async (req, res) => {
         try {
-            if (!req.session.login) {
-                return res.redirect('/login')
-            }
+            // if (!req.session.login) {
+            //     return res.redirect('/login')
+            // }
             const products = await productManager.getProducts() // Se obtiene la lista de productos
             res.render('home', { title: 'Home', products }) // Se pasa la lista de productos a la vista
         } catch (error) {
@@ -20,7 +20,16 @@ module.exports = (productManager, cartManager) => {
     // Ruta para la vista realTimeProducts.handlebars
     router.get('/realtimeproducts', async (req, res) => {
         try {
-            res.render('realTimeProducts', { title: 'Real Time Products' })
+            // Si el usuario no está loggeado se le redirigirá a la pagina de 'Login'
+            if (!req.session.login) {
+                return res.redirect('/login')
+            }
+            // Si el usuario es el Administrador tendrá acceso a la pagina 'Real Time Products'
+            if (req.session.user.role === 'admin') {
+                res.render('realTimeProducts', { title: 'Admin Hub' })
+            } else {
+                return res.redirect('/')
+            }
         } catch (error) {
             console.error('Error getting products:', error)
             res.status(500).json({ error: 'Internal Server Error' })
@@ -30,6 +39,10 @@ module.exports = (productManager, cartManager) => {
     // Ruta para la vista chat.handlebars
     router.get('/chat', async (req, res) => {
         try {
+            // Si el usuario no está loggeado se le redirigirá a la pagina de 'Login'
+            if (!req.session.login) {
+                return res.redirect('/login')
+            }
             res.render('chat', { title: 'Community Chat' })
         } catch (error) {
             console.error('Error getting products:', error)
@@ -40,10 +53,10 @@ module.exports = (productManager, cartManager) => {
     // Ruta para la vista product.handlebars
     router.get('/products', async (req, res) => {
         const page = req.query.page || 1
-        const limit = 5
+        const limit = 9
 
         try {
-            const productsList = await ProductModel.paginate({}, { limit, page })
+            const productsList = await ProductModel.paginate({ status: true }, { limit, page })
 
             const productsFinalResult = productsList.docs.map(product => {
                 const { id, ...rest } = product.toObject()
@@ -51,7 +64,7 @@ module.exports = (productManager, cartManager) => {
             })
 
             res.render('products', {
-                title: 'Products List',
+                title: 'iStore',
                 products: productsFinalResult,
                 hasPrevPage: productsList.hasPrevPage,
                 hasNextPage: productsList.hasNextPage,
@@ -99,21 +112,21 @@ module.exports = (productManager, cartManager) => {
 
     // Ruta para la vista login.handlebars
     router.get('/login', (req, res) => {
-        // Si el usuario ya está loggeado se le redirigirá a la pagina de productos
+        // Si el usuario ya está loggeado se le redirigirá a la pagina de 'Home'
         if (req.session.login) {
-            return res.redirect('/products')
+            return res.redirect('/')
         }
-        // Verificar si hay errores en la sesión
+        // Se Verifica si hay errores en la sesión
         const errors = req.session.errors || []
-        delete req.session.errors // Eliminar los errores de la sesión después de usarlos
+        delete req.session.errors // Se Eliminan los errores de la sesión después de usarlos
         res.render('login', { title: 'Login', errors })
     })
 
     // Ruta para la vista register.handlebars
     router.get('/register', (req, res) => {
-        // Si el usuario ya está loggeado se le redirigirá a la pagina de su perfil
+        // Si el usuario ya está loggeado se le redirigirá a la pagina 'Home'
         if (req.session.login) {
-            return res.redirect('/profile')
+            return res.redirect('/')
         }
         res.render('register', { title: 'Register' })
     })
@@ -126,6 +139,18 @@ module.exports = (productManager, cartManager) => {
         }
         res.render('profile', { user: req.session.user, title: 'Profile' })
     })
+
+    // router.get("/failedregister", (req, res) => {
+    //     res.render("failedRegister", { title: 'Failed Register' })
+    // })
+
+    // router.get("/registersuccess", (req, res) => {
+    //     res.render("registerSuccess", { title: 'Register Success' })
+    // })
+
+    // router.get("/failedlogin", async (req, res) => {
+    //     res.render('failedLogin', { title: "Failed Login" })
+    // })
 
     return router
 }

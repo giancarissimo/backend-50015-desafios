@@ -2,9 +2,16 @@ const inputErrors = document.querySelectorAll('.input_error')
 const inputs = document.querySelectorAll('.input')
 const placeholders = document.querySelectorAll('.input_placeholder')
 const iconError = document.querySelectorAll('.input_iconError')
-const pageTitle = document.title
+const pageName = document.title
 const passwordInput = document.getElementById('password')
 const showPasswordCheckbox = document.getElementById('showPasswordCheckbox')
+const bodyHtml = document.body
+
+// -------------------- Body Color --------------------
+
+if (pageName === 'Login' || pageName === 'Register' ) {
+    bodyHtml.style.backgroundColor = 'var(--clr-white)'
+}
 
 // Función para mostrar/ocultar la contraseña en el input
 showPasswordCheckbox.addEventListener('change', function() {
@@ -32,7 +39,7 @@ const loginErrors = [
     'User not found',
 ]
 
-if (pageTitle === 'Login') {
+if (pageName === 'Login') {
     // Se itera sobre los errores y aplican estilos de error a los campos correspondientes
     loginErrors.forEach(error => {
         inputErrors.forEach(inputError => {
@@ -59,7 +66,7 @@ const registerErrors = [
     'You must be at least 18 years old to register'
 ]
 
-if (pageTitle === 'Register') {
+if (pageName === 'Register') {
     // Se itera sobre los errores y se aplican estilos de error a los campos correspondientes
     registerErrors.forEach(error => {
         inputErrors.forEach(inputError => {

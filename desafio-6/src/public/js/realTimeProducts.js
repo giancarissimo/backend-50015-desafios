@@ -21,7 +21,7 @@ const renderProducts = (products) => {
                 <div class="productCard_info_text">
                     <h4>From $${parseFloat(product.price).toFixed(2)}</h4>
                 </div>
-                <a id="scrollToForm"><button class="productCard_buttonHover" id="btn_update">Update</button></a>
+                <a id="scrollToForm"><button class="productCard_buttonHover" id="btn_update">edit</button></a>
             </div>
             `
         containerProducts.appendChild(productCard)

@@ -1,0 +1,40 @@
+{{>header}}
+<section class="section_cart">
+    {{#unless products}}
+    <h1>Your Bag is empty.</h1>
+    <span>Free delivery and free returns.</span>
+    <a href="/products">Continue Shopping</a>
+    {{/unless}}
+    {{#if products}}
+    <h1>Review your Bag. <Span>Free delivery <br> and free returns.</Span></h1>
+    <ul class="cart_productList">
+        {{#each products }}
+        <li>
+            <p>Product title: {{this.product.title}}</p>
+            <p>Category: {{this.product.category}}</p>
+            <p>Price: ${{this.product.price}}</p>
+            <p>Quantity: {{this.quantity}}</p>
+        </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</section>
+<section class="section_guestCart_help">
+    <div class="guestCart_help">
+        <p>Need some help? <span>Chat Now</span> or call 1‑800‑MY‑APPLE.</p>
+    </div>
+</section>
+<section class="section_newArrivals">
+    <div class="newArrivals_text">
+        <h2>New Arrivals</h2>
+        <span>Check out the latest products.</span>
+        <a href="/products">Shop</a>
+    </div>
+    <div class="newArrivals_img">
+        <img id="appleNewArrivals_desktop" src="../assets/images/cart/apple_new_arrivals_desktop.jpg"
+            alt="New Arrivals">
+        <img id="appleNewArrivals_mobile" src="../assets/images/cart/apple_new_arrivals_mobile.jpg" alt="New Arrivals">
+    </div>
+</section>
+{{>footer}}
+<script src="/js/header.js"></script>

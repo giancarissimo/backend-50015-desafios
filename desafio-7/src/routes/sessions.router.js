@@ -9,20 +9,8 @@ const { admin_username, admin_email, admin_password, admin_data, admin_role } = 
 // Ruta POST /api/sessions/login - se utiliza passport y se inicia la sesión
 router.post("/login", async (req, res, next) => {
     const { email, password } = req.body
-    // Verificar si los campos están vacíos
-    if (!email && !password) {
-        // Renderizar la página de inicio de sesión con el mensaje de error
-        req.session.errors = { email: "Email address and password are required", password: "Email address and password are required" }
-        return res.redirect("/login")
-    }
-    if (!email) {
-        req.session.errors = { email: "Email address is required" }
-        return res.redirect("/login")
-    }
-    if (!password) {
-        req.session.errors = { password: "Password is required" }
-        return res.redirect("/login")
-    }
+    const errors = {}
+
     const adminUser = {
         username: admin_username,
         first_name: admin_data,
@@ -32,23 +20,31 @@ router.post("/login", async (req, res, next) => {
         password: admin_password,
         role: admin_role
     }
+
     if (email === adminUser.email && password === adminUser.password) {
         req.session.login = true
         req.session.user = { ...adminUser }
         res.redirect('/products')
         return
     }
+
     const user = await UserModel.findOne({ email: email })
     if (user) {
         // Se verifica si el email y la contraseña son validos para iniciar sesión
         if (user.email !== email || !isValidPassword(password, user)) {
-            req.session.errors = { email: "The email address or password are incorrect", password: "The email address or password are incorrect" }
-            return res.redirect("/login")
+            errors.email = "The email address or password are incorrect"
+            errors.password = "The email address or password are incorrect"
         }
     } else {
-        req.session.errors = { email: "User not found", password: "User not found" }
-        return res.redirect("/login")
+        errors.email = "User not found"
+        errors.password = "User not found"
     }
+
+    // Se verifica si hay algun error presente
+    if (Object.keys(errors).length > 0) {
+        return res.json({ errors })
+    }
+
     next()
 }, passport.authenticate("login", {
     failureRedirect: "/api/sessions/failedlogin"

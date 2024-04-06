@@ -123,10 +123,7 @@ module.exports = (productServices, cartServices) => {
         if (req.session.login) {
             return res.redirect('/')
         }
-        // Se Verifica si hay errores en la sesión
-        const errors = req.session.errors || []
-        delete req.session.errors // Se Eliminan los errores de la sesión después de usarlos
-        res.render('login', { title: 'Login', errors })
+        res.render('login', { title: 'Login' })
     })
 
     // Ruta para la vista register.handlebars

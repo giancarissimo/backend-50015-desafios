@@ -159,6 +159,7 @@ button {
     background-color: transparent;
     border: none;
     cursor: pointer;
+    user-select: none;
 }
 
 button:focus,
@@ -743,7 +744,7 @@ header {
 .input_placeholder {
     height: 1.6rem;
     position: absolute;
-    margin: 0rem 0rem 0rem 1.2rem;
+    margin: -.3rem 0rem 0rem 1.2rem;
     font-size: 1.7rem;
     font-weight: 400;
     line-height: 1.23536;
@@ -2082,6 +2083,24 @@ footer span {
     font-size: 1.5rem;
 }
 
+.show_password_icon {
+    width: 3rem;
+    height: auto;
+    position: absolute;
+    right: 4.2rem;
+    padding: .3rem 0rem 0rem 0rem;
+}
+
+.show_password_icon svg {
+    width: inherit;
+    height: inherit;
+    cursor: pointer;
+}
+
+.show_password_icon svg path {
+    fill: #86868B;
+}
+
 .login_registerOption span {
     font-size: 1.5rem;
 }
@@ -2116,25 +2135,41 @@ footer span {
 
 .input {
     width: 100%;
+    padding: .8rem 4rem 0rem 1rem;
+}
+
+.input-red {
+    border: .1rem solid var(--clr-red);
+    color: var(--clr-red);
+}
+
+.input-red:focus,
+.input-red:focus-visible,
+.input-red:focus-within {
+    border: .2rem solid var(--clr-red);
+}
+
+.placeholder-red {
+    color: var(--clr-red);
+}
+
+.show_password_icon-red svg path {
+    fill: var(--clr-red);
 }
 
 .input_error {
     font-family: 'SF Pro Display';
     color: var(--clr-red);
     font-size: 1.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .3rem;
 }
 
-.input_iconError {
-    width: 2.5rem;
-    height: 2.5rem;
-    position: absolute;
-    /* margin: 0rem 0rem 0rem 44rem; */
-    right: 5rem;
-}
-
-.input_iconError img {
-    width: inherit;
-    height: inherit;
+.input_error img {
+    width: 1.4rem;
+    height: auto;
 }
 
 /** -------------------- Register Success & Failed Login Page -------------------- **/

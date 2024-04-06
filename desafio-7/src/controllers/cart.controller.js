@@ -68,7 +68,7 @@ class CartController {
             // Se llama a la función clearCart del cartManager para eliminar todos los productos del carrito
             await cartServices.clearCart(cartId)
             // Se envía una respuesta exitosa al cliente
-            res.status(200).json({ message: 'All products deleted from cart successfully.' })
+            res.status(200).json({ message: 'All products have deleted from cart successfully.' })
         } catch (error) {
             console.error("Error deleting products from cart", error)
             res.status(500).json({ error: 'Internal Server Error' })
@@ -94,7 +94,7 @@ class CartController {
 
             // Se elimina el producto del carrito
             await cartServices.deleteProductFromCart(cartId, productId)
-            res.json({ message: `Product with id ${productId} removed from cart with id ${cartId}` })
+            res.json({ message: `Product with id ${productId} was removed from cart with id ${cartId}` })
         } catch (error) {
             console.error("Error deleting product from cart", error)
             res.status(500).json({ error: 'Internal Server Error' })
@@ -136,7 +136,7 @@ class CartController {
             const updatedCart = await cartServices.updateProductQuantityInCart(cartId, productId, quantity)
 
             // Se envia una respuesta con el carrito actualizado
-            res.json(updatedCart)
+            res.json(updatedCart.products)
         } catch (error) {
             console.error("Error updating product quantity in cart", error)
             res.status(500).json({ error: 'Internal Server Error' })
@@ -145,7 +145,7 @@ class CartController {
 
     async updateCart(req, res) {
         const cartId = req.params.cid
-        const newProducts = req.body.products
+        const newProducts = req.body
         try {
             // Se verifica si el carrito existe en el array de carritos
             const cart = await cartServices.getCartById(cartId)

@@ -67,20 +67,16 @@ class ProductController {
             const product = await productServices.getProductById(productId)
 
             if (!product) {
-                // res.status(404).json({ error: `A product with the id ${productId} was not found.` })
-                throw customError.createError({
+                customError.createError({
                     name: "Id not found",
-                    cause: errorsInfo.productIdNotFound(productId),
+                    cause: errorsInfo.productIdNotFound({ productId }),
                     message: "Error getting the product",
-                    code: errorsCode.TYPE_INVALID
+                    code: errorsCode.BAD_REQUEST
                 })
             } else {
                 res.json({ message: "Product found:", product })
             }
-
         } catch (error) {
-            // console.error("Error getting the product", error)
-            // res.status(500).json({ error: `Internal Server Error.` })
             next(error)
         }
     }
@@ -110,7 +106,7 @@ class ProductController {
         }
     }
 
-    async updateProduct(req, res) {
+    async updateProduct(req, res, next) {
         try {
             const productId = req.params.pid
             const updatedProduct = req.body
@@ -120,16 +116,19 @@ class ProductController {
                 await productServices.updateProduct(productId, updatedProduct)
                 return res.json({ message: "Product updated successfully:", updatedProduct })
             } else {
-                return res.status(404).json({ error: `A product with the id ${productId} was not found.` })
+                customError.createError({
+                    name: "Id not found",
+                    cause: errorsInfo.productIdNotFound({ productId }),
+                    message: "Error getting the product",
+                    code: errorsCode.BAD_REQUEST
+                })
             }
-
         } catch (error) {
-            console.error("Error updating the product", error)
-            res.status(500).json({ error: `Internal Server Error.` })
+            next(error)
         }
     }
 
-    async deleteProduct(req, res) {
+    async deleteProduct(req, res, next) {
         try {
             const productId = req.params.pid
             const productIdToVerify = await productServices.getProductById(productId)
@@ -138,12 +137,15 @@ class ProductController {
                 const productToDelete = await productServices.deleteProduct(productId)
                 return res.json({ message: "Product deleted successfully:", productToDelete })
             } else {
-                return res.status(404).json({ error: `A Product with the id ${productId} was not found.` })
+                customError.createError({
+                    name: "Id not found",
+                    cause: errorsInfo.productIdNotFound({ productId }),
+                    message: "Error getting the product",
+                    code: errorsCode.BAD_REQUEST
+                })
             }
-
         } catch (error) {
-            console.error("Error deleting the product", error)
-            res.status(500).json({ error: `Internal Server Error.` })
+            next(error)
         }
     }
 }

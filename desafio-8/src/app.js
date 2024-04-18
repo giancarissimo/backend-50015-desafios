@@ -34,7 +34,6 @@ const passport = require("passport")
 const initializePassport = require("./config/passport.config.js")
 
 // Middleware
-app.use(handleError)
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
@@ -75,6 +74,7 @@ app.use('/api/carts', require('./routes/cart.router')(cartController)) // Rutas 
 app.use('/api/users', require('./routes/users.router')(userController)) // Rutas de usuarios
 app.use('/api/sessions', require('./routes/sessions.router')(sessionController)) // Rutas de sessions
 app.use('/mockingproducts', require('./routes/mocking.router.js')(mockingController)) // Ruta de productos fake
+app.use(handleError)
 
 // Servir archivos estáticos desde la carpeta 'public'
 app.use(express.static('./src/public'))

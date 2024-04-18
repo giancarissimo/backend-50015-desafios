@@ -1,6 +1,6 @@
 class ErrorsInfo {
-    productIdNotFound(productId) {
-        return `A product with the id ${productId} was not found.`
+    productIdNotFound({productId}) {
+        return `***** A product with the id ${productId} was not found. *****`
     }
 }
 

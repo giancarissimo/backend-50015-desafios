@@ -1,0 +1,211 @@
+[
+    {
+        "id": 1,
+        "title": "Airpods Pro",
+        "description": "",
+        "category": "airpods",
+        "price": 249,
+        "thumbnail": "Airpods_Pro.jpeg",
+        "code": "CODE1",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 2,
+        "title": "iPhone 14",
+        "description": "",
+        "category": "iphone",
+        "price": 799,
+        "thumbnail": "iPhone14.jpg",
+        "code": "CODE2",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 3,
+        "title": "iPhone 14 Pro",
+        "description": "",
+        "category": "iphone",
+        "price": 999,
+        "thumbnail": "iPhone14_Pro.jpg",
+        "code": "CODE3",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 4,
+        "title": "Apple Watch Series 8",
+        "description": "",
+        "category": "watch",
+        "price": 399,
+        "thumbnail": "AppleWatch_Series8_Black.jpg",
+        "code": "CODE4",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 5,
+        "title": "Apple Watch Ultra",
+        "description": "",
+        "category": "watch",
+        "price": 799,
+        "thumbnail": "AppleWatch_Ultra.jpg",
+        "code": "CODE5",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 6,
+        "title": "MacBook Pro",
+        "description": "",
+        "category": "mac",
+        "price": 1999,
+        "thumbnail": "MacBook_Pro.jpg",
+        "code": "CODE6",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 7,
+        "title": "Airpods Max",
+        "description": "",
+        "category": "airpods",
+        "price": 549,
+        "thumbnail": "Airpods_Max_Black.jpg",
+        "code": "CODE7",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 8,
+        "title": "MacBook Air",
+        "description": "",
+        "category": "mac",
+        "price": 1099,
+        "thumbnail": "MacBook_Air.jpg",
+        "code": "CODE8",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 9,
+        "title": "iPad Pro",
+        "description": "",
+        "category": "ipad",
+        "price": 799,
+        "thumbnail": "iPad_Pro.jpg",
+        "code": "CODE9",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 10,
+        "title": "iPad Mini",
+        "description": "",
+        "category": "ipad",
+        "price": 499,
+        "thumbnail": "iPad_Mini.jpg",
+        "code": "CODE10",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 11,
+        "title": "iPad Air",
+        "description": "",
+        "category": "ipad",
+        "price": 599,
+        "thumbnail": "iPad_Air.jpg",
+        "code": "CODE11",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 12,
+        "title": "20W USB-C Charger",
+        "description": "",
+        "category": "accesories",
+        "price": 19,
+        "thumbnail": "Apple_Charger.jpeg",
+        "code": "CODE12",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 13,
+        "title": "USB-C Charging Cable",
+        "description": "",
+        "category": "accesories",
+        "price": 29,
+        "thumbnail": "Apple_Charging_Cable.jpeg",
+        "code": "CODE13",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 14,
+        "title": "Airtag",
+        "description": "",
+        "category": "accesories",
+        "price": 29,
+        "thumbnail": "Airtag.jpg",
+        "code": "CODE14",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 15,
+        "title": "Screen Protector",
+        "description": "",
+        "category": "accesories",
+        "price": 39.95,
+        "thumbnail": "Screen_Protector.jpg",
+        "code": "CODE15",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 16,
+        "title": "Magic Keyborad",
+        "description": "",
+        "category": "accesories",
+        "price": 349,
+        "thumbnail": "Apple_Magic_Keyboard.jpeg",
+        "code": "CODE16",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 17,
+        "title": "3-in-1 Travel Charger",
+        "description": "",
+        "category": "accesories",
+        "price": 149.95,
+        "thumbnail": "Travel_Charger.jpeg",
+        "code": "CODE17",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 18,
+        "title": "Apple Pencil (2nd gen)",
+        "description": "",
+        "category": "accesories",
+        "price": 129,
+        "thumbnail": "Apple_Pencil.jpeg",
+        "code": "CODE18",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 19,
+        "title": "Apple Vision Pro",
+        "description": "hola",
+        "category": "accesories",
+        "price": 3499,
+        "thumbnail": "Apple_Vision_Pro.jpg",
+        "code": "CODE19",
+        "stock": 20,
+        "status": false
+    }
+]

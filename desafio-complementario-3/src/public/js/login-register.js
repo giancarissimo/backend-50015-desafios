@@ -120,7 +120,6 @@ if (pageName === 'Recover your account') {
 async function validateResetPasswordForm(event) {
     // Se evita que el formulario se envíe automáticamente
     event.preventDefault()
-    debugger
     // Se coloca un objeto de requerimiento de inputs
     const inputsRequired = {
         email: `${errorImg} Email address is required`,

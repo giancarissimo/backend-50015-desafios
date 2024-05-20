@@ -4,7 +4,7 @@ const pageName = document.title
 const inputs = document.querySelectorAll('.input')
 const inputErrors = document.querySelectorAll('.input_error')
 const placeholders = document.querySelectorAll('.input_placeholder')
-const showPasswordIcon = document.querySelector('#showPasswordIcon')
+const showPasswordIcon = document.querySelectorAll('#showPasswordIcon')
 const errorImg = `<img src="../assets/images/png/ios-exclamation-mark-icon.png" alt="Exclamation Mark Icon">`
 
 // General inputs
@@ -29,8 +29,10 @@ const hideInputEmail = document.getElementById('hideInputEmail')
 const tokenErrors = document.querySelector('#errors_token')
 const newPasswordInput = document.querySelector('#newPassword')
 const errorsNewPassword = document.querySelector('#errors_newPassword')
+const showNewPasswordIcon = document.querySelector('#showNewPasswordIcon')
 const confirmPasswordInput = document.querySelector('#confirmPassword')
 const errorsConfirmPassword = document.querySelector('#errors_confirmPassword')
+const showConfirmPasswordIcon = document.querySelector('#showConfirmPasswordIcon')
 
 // Login Page
 const loginForm = document.querySelector('#loginForm')
@@ -49,22 +51,21 @@ const errorsAge = document.querySelector('#errors_age')
 // Cambiar el color del 'Body'
 if (pageName === 'Login' || pageName === 'Register') {
     bodyHtml.style.backgroundColor = 'var(--clr-white)'
+
+    // Función para mostrar/ocultar la contraseña en el input
+    let passwordVisible = false
+
+    showPasswordIcon.addEventListener('click', () => {
+        passwordVisible = !passwordVisible
+        if (passwordVisible) {
+            passwordInput.type = 'text'
+            icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M 8.073 12.194 L 4.212 8.333 c -1.52 1.657 -2.096 3.317 -2.106 3.351 L 2 12 l 0.105 0.316 C 2.127 12.383 4.421 19 12.054 19 c 0.929 0 1.775 -0.102 2.552 -0.273 l -2.746 -2.746 a 3.987 3.987 0 0 1 -3.787 -3.787 Z M 12.054 5 c -1.855 0 -3.375 0.404 -4.642 0.998 L 3.707 2.293 L 2.293 3.707 l 18 18 l 1.414 -1.414 l -3.298 -3.298 c 2.638 -1.953 3.579 -4.637 3.593 -4.679 l 0.105 -0.316 l -0.105 -0.316 C 21.98 11.617 19.687 5 12.054 5 Z m 1.906 7.546 c 0.187 -0.677 0.028 -1.439 -0.492 -1.96 s -1.283 -0.679 -1.96 -0.492 L 10 8.586 A 3.955 3.955 0 0 1 12.054 8 c 2.206 0 4 1.794 4 4 a 3.94 3.94 0 0 1 -0.587 2.053 l -1.507 -1.507 Z" /></svg>'
+        } else {
+            passwordInput.type = 'text'
+            icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M 12 5 c -7.633 0 -9.927 6.617 -9.948 6.684 L 1.946 12 l 0.105 0.316 C 2.073 12.383 4.367 19 12 19 s 9.927 -6.617 9.948 -6.684 l 0.106 -0.316 l -0.105 -0.316 C 21.927 11.617 19.633 5 12 5 Z m 0 11 c -2.206 0 -4 -1.794 -4 -4 s 1.794 -4 4 -4 s 4 1.794 4 4 s -1.794 4 -4 4 Z" /><path d="M 12 10 c -1.084 0 -2 0.916 -2 2 s 0.916 2 2 2 s 2 -0.916 2 -2 s -0.916 -2 -2 -2 Z" /></svg>'
+        }
+    })
 }
-
-// // Función para mostrar/ocultar la contraseña en el input
-// let passwordVisible = false
-
-// showPasswordIcon.addEventListener('click', () => {
-//     passwordVisible = !passwordVisible
-
-//     if (passwordVisible) {
-//         passwordInput.type = 'text'
-//         showPasswordIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M 8.073 12.194 L 4.212 8.333 c -1.52 1.657 -2.096 3.317 -2.106 3.351 L 2 12 l 0.105 0.316 C 2.127 12.383 4.421 19 12.054 19 c 0.929 0 1.775 -0.102 2.552 -0.273 l -2.746 -2.746 a 3.987 3.987 0 0 1 -3.787 -3.787 Z M 12.054 5 c -1.855 0 -3.375 0.404 -4.642 0.998 L 3.707 2.293 L 2.293 3.707 l 18 18 l 1.414 -1.414 l -3.298 -3.298 c 2.638 -1.953 3.579 -4.637 3.593 -4.679 l 0.105 -0.316 l -0.105 -0.316 C 21.98 11.617 19.687 5 12.054 5 Z m 1.906 7.546 c 0.187 -0.677 0.028 -1.439 -0.492 -1.96 s -1.283 -0.679 -1.96 -0.492 L 10 8.586 A 3.955 3.955 0 0 1 12.054 8 c 2.206 0 4 1.794 4 4 a 3.94 3.94 0 0 1 -0.587 2.053 l -1.507 -1.507 Z" /></svg>'
-//     } else {
-//         passwordInput.type = 'password'
-//         showPasswordIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M 12 5 c -7.633 0 -9.927 6.617 -9.948 6.684 L 1.946 12 l 0.105 0.316 C 2.073 12.383 4.367 19 12 19 s 9.927 -6.617 9.948 -6.684 l 0.106 -0.316 l -0.105 -0.316 C 21.927 11.617 19.633 5 12 5 Z m 0 11 c -2.206 0 -4 -1.794 -4 -4 s 1.794 -4 4 -4 s 4 1.794 4 4 s -1.794 4 -4 4 Z" /><path d="M 12 10 c -1.084 0 -2 0.916 -2 2 s 0.916 2 2 2 s 2 -0.916 2 -2 s -0.916 -2 -2 -2 Z" /></svg>'
-//     }
-// })
 
 // Función para manejar los estilos de error de un input específico
 const handleInputsErrorStyle = (input, hasErrors) => {
@@ -193,6 +194,31 @@ async function validateResetPasswordForm(event) {
 // -------------------- Reset Password Page --------------------
 
 if (pageName === 'Reset your password') {
+    // Función para mostrar/ocultar la contraseña en el input
+    let passwordVisible = false
+
+    showNewPasswordIcon.addEventListener('click', () => {
+        passwordVisible = !passwordVisible
+        if (passwordVisible) {
+            newPasswordInput.type = 'text'
+            showNewPasswordIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M 8.073 12.194 L 4.212 8.333 c -1.52 1.657 -2.096 3.317 -2.106 3.351 L 2 12 l 0.105 0.316 C 2.127 12.383 4.421 19 12.054 19 c 0.929 0 1.775 -0.102 2.552 -0.273 l -2.746 -2.746 a 3.987 3.987 0 0 1 -3.787 -3.787 Z M 12.054 5 c -1.855 0 -3.375 0.404 -4.642 0.998 L 3.707 2.293 L 2.293 3.707 l 18 18 l 1.414 -1.414 l -3.298 -3.298 c 2.638 -1.953 3.579 -4.637 3.593 -4.679 l 0.105 -0.316 l -0.105 -0.316 C 21.98 11.617 19.687 5 12.054 5 Z m 1.906 7.546 c 0.187 -0.677 0.028 -1.439 -0.492 -1.96 s -1.283 -0.679 -1.96 -0.492 L 10 8.586 A 3.955 3.955 0 0 1 12.054 8 c 2.206 0 4 1.794 4 4 a 3.94 3.94 0 0 1 -0.587 2.053 l -1.507 -1.507 Z" /></svg>'
+        } else {
+            newPasswordInput.type = 'password'
+            showNewPasswordIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M 12 5 c -7.633 0 -9.927 6.617 -9.948 6.684 L 1.946 12 l 0.105 0.316 C 2.073 12.383 4.367 19 12 19 s 9.927 -6.617 9.948 -6.684 l 0.106 -0.316 l -0.105 -0.316 C 21.927 11.617 19.633 5 12 5 Z m 0 11 c -2.206 0 -4 -1.794 -4 -4 s 1.794 -4 4 -4 s 4 1.794 4 4 s -1.794 4 -4 4 Z" /><path d="M 12 10 c -1.084 0 -2 0.916 -2 2 s 0.916 2 2 2 s 2 -0.916 2 -2 s -0.916 -2 -2 -2 Z" /></svg>'
+        }
+    })
+
+    showConfirmPasswordIcon.addEventListener('click', () => {
+        passwordVisible = !passwordVisible
+        if (passwordVisible) {
+            confirmPasswordInput.type = 'text'
+            showConfirmPasswordIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M 8.073 12.194 L 4.212 8.333 c -1.52 1.657 -2.096 3.317 -2.106 3.351 L 2 12 l 0.105 0.316 C 2.127 12.383 4.421 19 12.054 19 c 0.929 0 1.775 -0.102 2.552 -0.273 l -2.746 -2.746 a 3.987 3.987 0 0 1 -3.787 -3.787 Z M 12.054 5 c -1.855 0 -3.375 0.404 -4.642 0.998 L 3.707 2.293 L 2.293 3.707 l 18 18 l 1.414 -1.414 l -3.298 -3.298 c 2.638 -1.953 3.579 -4.637 3.593 -4.679 l 0.105 -0.316 l -0.105 -0.316 C 21.98 11.617 19.687 5 12.054 5 Z m 1.906 7.546 c 0.187 -0.677 0.028 -1.439 -0.492 -1.96 s -1.283 -0.679 -1.96 -0.492 L 10 8.586 A 3.955 3.955 0 0 1 12.054 8 c 2.206 0 4 1.794 4 4 a 3.94 3.94 0 0 1 -0.587 2.053 l -1.507 -1.507 Z" /></svg>'
+        } else {
+            confirmPasswordInput.type = 'password'
+            showConfirmPasswordIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M 12 5 c -7.633 0 -9.927 6.617 -9.948 6.684 L 1.946 12 l 0.105 0.316 C 2.073 12.383 4.367 19 12 19 s 9.927 -6.617 9.948 -6.684 l 0.106 -0.316 l -0.105 -0.316 C 21.927 11.617 19.633 5 12 5 Z m 0 11 c -2.206 0 -4 -1.794 -4 -4 s 1.794 -4 4 -4 s 4 1.794 4 4 s -1.794 4 -4 4 Z" /><path d="M 12 10 c -1.084 0 -2 0.916 -2 2 s 0.916 2 2 2 s 2 -0.916 2 -2 s -0.916 -2 -2 -2 Z" /></svg>'
+        }
+    })
+
     // Se obtienen todas las cookies
     const allCookies = document.cookie
 

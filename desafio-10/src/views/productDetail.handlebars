@@ -52,16 +52,21 @@
                     </div>
                 </div>
             </div>
-            {{#unless isUserPremium}}
             {{#if user}}
+            {{#unless isUserPremium}}
             <form action="/api/carts/{{user.cart}}/product/{{product.id}}" method="POST">
                 <button class="itemDetail_add_to_bag">Add to Bag</button>
             </form>
+            {{/unless}}
+            {{#if isUserPremium}}
+            {{#unless isOwnerAdmin}}
+                <button style="color: grey; pointer-events: none;">You're the owner of this product</button>
+            {{/unless}}
+            {{/if}}
             {{/if}}
             {{#unless user}}
             <button class="itemDetail_add_to_bag"><a href="/cart/guest">Add to Bag</a></button>
             {{/unless}}
-            {{/unless }}
             <div class="itemDetail_saveProduct">
                 <span>Need a moment?</span>
                 <p>Keep all your selections by saving this device to Your Saves, then come back anytime and pick up

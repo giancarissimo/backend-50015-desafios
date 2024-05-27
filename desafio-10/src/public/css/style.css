@@ -1673,6 +1673,9 @@ footer span {
 .itemDetail_info_container {
     padding: 0rem 0rem 3rem 0rem;
     border-top: 1px solid #d2d2d7;
+    max-width: inherit;
+    width: inherit;
+    min-width: inherit;
 }
 
 .itemDetail_info_container h1 {

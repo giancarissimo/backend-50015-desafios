@@ -73,6 +73,12 @@ class CartController {
     async clearCart(req, res) {
         const cartId = req.params.cid
         try {
+            // Se verifica si el carrito existe en el array de carritos
+            const verifyCartId = await cartServices.getCartById(cartId)
+            if (!verifyCartId) {
+                res.status(404).json({ error: `No cart exists with the id ${cartId}` })
+                return cartId
+            }
             // Se llama a la función clearCart del cartManager para eliminar todos los productos del carrito
             await cartServices.clearCart(cartId)
             // Se envía una respuesta exitosa al cliente

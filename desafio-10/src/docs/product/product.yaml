@@ -1,6 +1,7 @@
 tags:
   - name: Products
     description: The products managing API
+
 components:
   schemas:
     Product:
@@ -40,9 +41,58 @@ components:
           description: The availability status of the product
         thumbnails:
           type: list
+          items:
+            type: string
           description: The images of the product
       example:
         id: d5fE_asz
+        title: Example Product
+        description: This is an example product
+        category: Example Category
+        price: 99.99
+        code: EX123
+        stock: 100
+        status: true
+        thumbnails: ['product-image.jpg']
+
+    ProductInput:
+      type: object
+      required:
+        - title
+        - description
+        - category
+        - price
+        - code
+        - stock
+        - status
+      properties:
+        title:
+          type: string
+          description: The title of the product
+        description:
+          type: string
+          description: The description of the product
+        category:
+          type: string
+          description: The category of the product
+        price:
+          type: number
+          description: The price of the product
+        code:
+          type: string
+          description: The code of the product
+        stock:
+          type: number
+          description: The stock quantity of the product
+        status:
+          type: boolean
+          description: The availability status of the product
+        thumbnails:
+          type: list
+          items:
+            type: string
+          description: The images of the product
+      example:
         title: Example Product
         description: This is an example product
         category: Example Category
@@ -115,6 +165,14 @@ paths:
                     type: string
         500:
           description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal Server Error.
     post:
       summary: Add a new product
       tags: [Products]
@@ -123,18 +181,40 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Product'
+              $ref: '#/components/schemas/ProductInput'
       responses:
         200:
           description: The product was successfully created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Product'
+                $ref: '#/components/schemas/ProductInput'
         400:
-          description: Bad request
+          description: Missing required fields
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "All fields are mandatory."
+                  - type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "A product with that code already exists."
         500:
           description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal Server Error.
 
   /api/products/{pid}:
     get:
@@ -156,8 +236,24 @@ paths:
                 $ref: '#/components/schemas/Product'
         404:
           description: Product not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: A product with the id {pid} was not found
         500:
           description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal Server Error.
     put:
       summary: Update a product
       tags: [Products]
@@ -173,18 +269,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Product'
+              $ref: '#/components/schemas/ProductInput'
       responses:
         200:
           description: The product was successfully updated
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Product'
+                $ref: '#/components/schemas/ProductInput'
         404:
           description: Product not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: A product with the id {pid} was not found.
         500:
           description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal Server Error.
     delete:
       summary: Delete a product
       tags: [Products]
@@ -204,5 +316,21 @@ paths:
                 $ref: '#/components/schemas/Product'
         404:
           description: Product not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: A product with the id {pid} was not found.
         500:
           description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal Server Error.

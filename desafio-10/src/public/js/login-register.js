@@ -4,7 +4,7 @@ const pageName = document.title
 const inputs = document.querySelectorAll('.input')
 const inputErrors = document.querySelectorAll('.input_error')
 const placeholders = document.querySelectorAll('.input_placeholder')
-const showPasswordIcon = document.querySelectorAll('#showPasswordIcon')
+const showPasswordIcon = document.querySelector('#showPasswordIcon')
 const errorImg = `<img src="../assets/images/png/ios-exclamation-mark-icon.png" alt="Exclamation Mark Icon">`
 
 // General inputs
@@ -23,6 +23,7 @@ const requestPasswordBtn = document.querySelector('#requestPassword_btn')
 
 // Reset Password Page
 const resetpasswordForm = document.querySelector('#resetpasswordForm')
+const cancelResetPasswordBtn = document.querySelector('#resetpassword_cancel')
 const otpInputs = document.querySelectorAll('.otp-input')
 const hideInputToken = document.getElementById('hideInputToken')
 const hideInputEmail = document.getElementById('hideInputEmail')
@@ -48,10 +49,9 @@ const errorsLastName = document.querySelector('#errors_last_name')
 const inputAge = document.querySelector('#age')
 const errorsAge = document.querySelector('#errors_age')
 
-// Cambiar el color del 'Body'
+// Acciones para ambas páginas
 if (pageName === 'Login' || pageName === 'Register') {
     bodyHtml.style.backgroundColor = 'var(--clr-white)'
-
     // Función para mostrar/ocultar la contraseña en el input
     let passwordVisible = false
 
@@ -59,10 +59,10 @@ if (pageName === 'Login' || pageName === 'Register') {
         passwordVisible = !passwordVisible
         if (passwordVisible) {
             passwordInput.type = 'text'
-            icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M 8.073 12.194 L 4.212 8.333 c -1.52 1.657 -2.096 3.317 -2.106 3.351 L 2 12 l 0.105 0.316 C 2.127 12.383 4.421 19 12.054 19 c 0.929 0 1.775 -0.102 2.552 -0.273 l -2.746 -2.746 a 3.987 3.987 0 0 1 -3.787 -3.787 Z M 12.054 5 c -1.855 0 -3.375 0.404 -4.642 0.998 L 3.707 2.293 L 2.293 3.707 l 18 18 l 1.414 -1.414 l -3.298 -3.298 c 2.638 -1.953 3.579 -4.637 3.593 -4.679 l 0.105 -0.316 l -0.105 -0.316 C 21.98 11.617 19.687 5 12.054 5 Z m 1.906 7.546 c 0.187 -0.677 0.028 -1.439 -0.492 -1.96 s -1.283 -0.679 -1.96 -0.492 L 10 8.586 A 3.955 3.955 0 0 1 12.054 8 c 2.206 0 4 1.794 4 4 a 3.94 3.94 0 0 1 -0.587 2.053 l -1.507 -1.507 Z" /></svg>'
+            showPasswordIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M 8.073 12.194 L 4.212 8.333 c -1.52 1.657 -2.096 3.317 -2.106 3.351 L 2 12 l 0.105 0.316 C 2.127 12.383 4.421 19 12.054 19 c 0.929 0 1.775 -0.102 2.552 -0.273 l -2.746 -2.746 a 3.987 3.987 0 0 1 -3.787 -3.787 Z M 12.054 5 c -1.855 0 -3.375 0.404 -4.642 0.998 L 3.707 2.293 L 2.293 3.707 l 18 18 l 1.414 -1.414 l -3.298 -3.298 c 2.638 -1.953 3.579 -4.637 3.593 -4.679 l 0.105 -0.316 l -0.105 -0.316 C 21.98 11.617 19.687 5 12.054 5 Z m 1.906 7.546 c 0.187 -0.677 0.028 -1.439 -0.492 -1.96 s -1.283 -0.679 -1.96 -0.492 L 10 8.586 A 3.955 3.955 0 0 1 12.054 8 c 2.206 0 4 1.794 4 4 a 3.94 3.94 0 0 1 -0.587 2.053 l -1.507 -1.507 Z" /></svg>'
         } else {
-            passwordInput.type = 'text'
-            icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M 12 5 c -7.633 0 -9.927 6.617 -9.948 6.684 L 1.946 12 l 0.105 0.316 C 2.073 12.383 4.367 19 12 19 s 9.927 -6.617 9.948 -6.684 l 0.106 -0.316 l -0.105 -0.316 C 21.927 11.617 19.633 5 12 5 Z m 0 11 c -2.206 0 -4 -1.794 -4 -4 s 1.794 -4 4 -4 s 4 1.794 4 4 s -1.794 4 -4 4 Z" /><path d="M 12 10 c -1.084 0 -2 0.916 -2 2 s 0.916 2 2 2 s 2 -0.916 2 -2 s -0.916 -2 -2 -2 Z" /></svg>'
+            passwordInput.type = 'password'
+            showPasswordIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M 12 5 c -7.633 0 -9.927 6.617 -9.948 6.684 L 1.946 12 l 0.105 0.316 C 2.073 12.383 4.367 19 12 19 s 9.927 -6.617 9.948 -6.684 l 0.106 -0.316 l -0.105 -0.316 C 21.927 11.617 19.633 5 12 5 Z m 0 11 c -2.206 0 -4 -1.794 -4 -4 s 1.794 -4 4 -4 s 4 1.794 4 4 s -1.794 4 -4 4 Z" /><path d="M 12 10 c -1.084 0 -2 0.916 -2 2 s 0.916 2 2 2 s 2 -0.916 2 -2 s -0.916 -2 -2 -2 Z" /></svg>'
         }
     })
 }
@@ -256,6 +256,9 @@ if (pageName === 'Reset your password') {
             }
         })
     })
+    cancelResetPasswordBtn.addEventListener('click', () => {
+        document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/resetpassword;' // Se limpia la cookie 'email'
+    })
     resetpasswordForm.addEventListener('submit', () => { validateRequestPasswordResetForm(event) })
 }
 
@@ -374,7 +377,7 @@ async function validateLoginForm(event) {
                 return null
             }
 
-            const response = await fetch('/api/users/login', {
+            const response = await fetch('/api/users/login-validate', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -467,7 +470,7 @@ async function validateForm(event) {
                 return null
             }
 
-            const response = await fetch('/api/users/register', {
+            const response = await fetch('/api/users/register-validate', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

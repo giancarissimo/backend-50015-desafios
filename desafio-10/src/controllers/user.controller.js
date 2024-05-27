@@ -12,6 +12,30 @@ const EmailServices = require('../services/emailServices.js')
 const emailServices = new EmailServices()
 
 class UserController {
+    async register_validate(req, res, next) {
+        const { username, email } = req.body
+        const errors = {}
+
+        // Se valida si el usuario ya existe
+        const existingUser = await UserModel.findOne({ $or: [{ username: username }, { email: email }] })
+
+        // Se valida si el username ya está registrado
+        if (existingUser?.username || username === admin_username) {
+            errors.username = 'The username is already registered'
+        }
+
+        // Se valida si el correo electrónico ya está registrado
+        if (existingUser?.email || email === admin_email) {
+            errors.email = 'The email address is already registered'
+        }
+
+        // Se verifica si hay algun error presente
+        if (Object.keys(errors).length > 0) {
+            return res.json({ errors })
+        }
+        next()
+    }
+
     async register(req, res) {
         try {
             const { username, first_name, last_name, email, password, age, role } = req.body
@@ -60,6 +84,49 @@ class UserController {
     // renderFailedRegister(req, res) {
     //     res.render('failedRegister', { title: 'Failed Register' })
     // }
+
+    async login_validate(req, res, next) {
+        const { email, password } = req.body
+        const user = await UserModel.findOne({ email: email })
+        const errors = {}
+
+        const adminUser = {
+            username: admin_username,
+            first_name: admin_data,
+            last_name: admin_data,
+            email: admin_email,
+            password: admin_password,
+            age: admin_data,
+            role: admin_role
+        }
+
+        if (email === adminUser.email && password === adminUser.password) {
+            const token = jwt.sign({ user: adminUser }, secret_cookie_token, { expiresIn: '1h' })
+            res.cookie('cookieAppStore', token, {
+                maxAge: 3600000,
+                httpOnly: true
+            })
+            res.redirect('/realtimeproducts')
+            return
+        }
+
+        if (user) {
+            // Se verifica si el email y la contraseña son validos para iniciar sesión
+            if (user.email !== email || !isValidPassword(password, user)) {
+                errors.email = 'The email address or password are incorrect'
+                errors.password = 'The email address or password are incorrect'
+            }
+        } else {
+            errors.email = 'The email address or password are incorrect'
+            errors.password = 'The email address or password are incorrect'
+        }
+
+        // Se verifica si hay algun error presente
+        if (Object.keys(errors).length > 0) {
+            return res.json({ errors })
+        }
+        next()
+    }
 
     async login(req, res) {
         const { email, password } = req.body

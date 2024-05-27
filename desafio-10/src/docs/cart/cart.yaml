@@ -1,6 +1,7 @@
 tags:
   - name: Carts
     description: The carts managing API
+
 components:
   schemas:
     Cart:
@@ -78,6 +79,14 @@ paths:
                 $ref: '#/components/schemas/Cart'
         500:
           description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal Server Error.
 
   /api/carts/{cid}:
     get:
@@ -101,23 +110,24 @@ paths:
                   $ref: '#/components/schemas/ProductInCart'
         404:
           description: Cart not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: No cart exist with the id {cid}
         500:
           description: Internal server error
-    delete:
-      summary: Clear a cart by id
-      tags: [Carts]
-      parameters:
-        - in: path
-          name: cid
-          schema:
-            type: string
-          required: true
-          description: The cart id
-      responses:
-        200:
-          description: All products have been deleted from the cart successfully
-        500:
-          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal Server Error.
     put:
       summary: Update a cart with an array of products
       tags: [Carts]
@@ -145,8 +155,58 @@ paths:
                 $ref: '#/components/schemas/Cart'
         404:
           description: Cart not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: No cart exist with the id {cid}
+                    description: Missing required fields
         500:
           description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal Server Error.
+    delete:
+      summary: Clear a cart by id
+      tags: [Carts]
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: The cart id
+      responses:
+        200:
+          description: All products have been deleted from the cart successfully
+        404:
+          description: Cart not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: No cart exist with the id {cid}
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal Server Error.
 
   /api/carts/{cid}/product/{pid}:
     post:
@@ -184,35 +244,30 @@ paths:
                 $ref: '#/components/schemas/Cart'
         404:
           description: Cart or product not found
-        500:
-          description: Internal server error
-    delete:
-      summary: Delete a product from a cart
-      tags: [Carts]
-      parameters:
-        - in: path
-          name: cid
-          schema:
-            type: string
-          required: true
-          description: The cart id
-        - in: path
-          name: pid
-          schema:
-            type: string
-          required: true
-          description: The product id
-      responses:
-        200:
-          description: The product was successfully removed from the cart
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Cart'
-        404:
-          description: Cart or product not found
+                oneOf:
+                  - type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "A cart with the id {cid} was not found."
+                  - type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "A product with the id {pid} was not found."
         500:
           description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal Server Error.
     put:
       summary: Update the quantity of a product in a cart
       tags: [Carts]
@@ -247,8 +302,79 @@ paths:
                 $ref: '#/components/schemas/Cart'
         404:
           description: Cart or product not found
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "A cart with the id {cid} was not found."
+                  - type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "A product with the id {pid} was not found."
         500:
           description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal Server Error.
+    delete:
+      summary: Delete a product from a cart
+      tags: [Carts]
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: The cart id
+        - in: path
+          name: pid
+          schema:
+            type: string
+          required: true
+          description: The product id
+      responses:
+        200:
+          description: The product was successfully removed from the cart
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        404:
+          description: Cart or product not found
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "A cart with the id {cid} was not found."
+                  - type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "A product with the id {pid} was not found."
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal Server Error.
 
   /api/carts/{cid}/purchase:
     post:
@@ -270,3 +396,11 @@ paths:
                 $ref: '#/components/schemas/Purchase'
         500:
           description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal Server Error.

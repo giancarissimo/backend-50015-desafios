@@ -83,7 +83,8 @@ class ViewsController {
         try {
             const productId = req.params.productId
             const product = await productServices.getProductById(productId) // se obtiene el producto por su ID
-            res.render('productDetail', { title: 'Product Detail', product }) // Se renderiza la vista 'productDetails' con los detalles del producto
+            const isOwnerAdmin = product.owner === 'admin'
+            res.render('productDetail', { title: 'Product Detail', product, isOwnerAdmin })
         } catch (error) {
             logger.error('Error getting the product detail page:', error)
             res.status(500).json({ error: 'Internal Server Error' })

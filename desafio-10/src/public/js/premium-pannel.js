@@ -13,7 +13,7 @@ const renderProducts = (products) => {
     containerProducts.innerHTML = ""
 
     products.forEach(product => {
-        if (product.owner === userEmail) {
+        if (product.owner === userEmail.innerText) {
             const productCard = document.createElement("div")
             productCard.classList.add("productCard_premium")
             // Se renderiza cada card
@@ -43,14 +43,13 @@ const getProductData = () => {
         code: document.getElementById("code").value,
         stock: document.getElementById("stock").value,
         status: document.getElementById("productStatus").value,
-        // thumbnails: document.getElementById("thumbnail").value,
+        // thumbnails: document.getElementById("thumbnails").value,
         owner: userEmail.innerText
     }
     return product
 }
 
-premiumProductForm.addEventListener('submit', (event) => {
-    event.preventDefault()
+premiumProductForm.addEventListener('submit', () => {
     socket.emit("addProduct", getProductData())
     premiumProductForm.reset()
 })

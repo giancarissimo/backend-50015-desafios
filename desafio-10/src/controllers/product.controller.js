@@ -90,14 +90,14 @@ class ProductController {
             const missingFields = requiredFields.filter(field => !(field in newProduct) || (typeof newProduct[field] === "string" && newProduct[field].trim() === ""))
 
             if (missingFields.length > 0) {
-                return res.status(404).json({ message: "All fields are mandatory." })
+                return res.status(400).json({ message: "All fields are mandatory." })
             }
 
             const products = await productServices.getProducts()
             const existingProduct = products.find(product => product.code === newProduct.code)
 
             if (existingProduct) {
-                return res.status(404).json({ message: "A product with that code already exists." })
+                return res.status(400).json({ message: "A product with that code already exists." })
             }
 
             await productServices.addProduct(newProduct)

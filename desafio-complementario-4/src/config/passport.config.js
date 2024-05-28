@@ -1,23 +1,19 @@
-const passport = require('passport')
-const local = require('passport-local')
-const GitHubStrategy = require('passport-github2')
+import passport from 'passport'
+import { Strategy as GitHubStrategy } from 'passport-github2'
 
-const jwt = require('passport-jwt')
-const JWTStrategy = jwt.Strategy
-const ExtractJwt = jwt.ExtractJwt
+import jwt from 'passport-jwt'
+const { Strategy: JWTStrategy, ExtractJwt } = jwt
 
 // Traemos las funcionalidades del Carrito
-const CartServices = require('../services/cartServices.js')
+import CartServices from '../services/cartServices.js'
 const cartServices = new CartServices()
 
 // Traemos el UserModel y las funciones de bcrypt
-const UserModel = require('../models/user.model.js')
-const GithubserModel = require('../models/githubUser.model.js')
-const { createHash, isValidPassword } = require('../utils/hashBcrypt.js')
-const LocalStrategy = local.Strategy
+import UserModel from '../models/user.model.js'
+import GithubUserModel from '../models/githubUser.model.js'
 
 // Traemos las variables de entorno
-const configObject = require('../config/config.js')
+import configObject from '../config/config.js'
 const { secret_cookie_token, github_client_id, github_client_secret, github_callback_url } = configObject
 
 const initializePassport = () => {
@@ -49,7 +45,7 @@ const initializePassport = () => {
     }, async (accessToken, refreshToken, profile, done) => {
         console.log('Profile: ', profile)
         try {
-            let user = await GithubserModel.findOne({ email: profile._json.email })
+            let user = await GithubUserModel.findOne({ email: profile._json.email })
 
             let nameComponents = profile._json.name.split(' ')
             let firstName = nameComponents[0]
@@ -67,7 +63,7 @@ const initializePassport = () => {
                     role,
                     cart: newCart._id
                 }
-                let result = await GithubserModel.create(newUser)
+                let result = await GithubUserModel.create(newUser)
                 done(null, result)
             } else {
                 done(null, user)
@@ -86,4 +82,4 @@ const cookieExtractor = (req) => {
     return token
 }
 
-module.exports = initializePassport
+export default initializePassport

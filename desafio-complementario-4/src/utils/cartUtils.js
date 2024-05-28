@@ -23,5 +23,4 @@ class CartUtils {
         return total
     }
 }
-
-module.exports = CartUtils
+export default CartUtils

@@ -1,7 +1,8 @@
-const CartModel = require("../models/carts.model.js")
-const ProductServices = require('../services/productServices.js')
+import CartModel from "../models/carts.model.js"
+import ProductServices from '../services/productServices.js'
+import logger from "../utils/logger.js"
+
 const productServices = new ProductServices()
-const logger = require("../utils/logger.js")
 
 class CartServices {
     async createCart() {
@@ -177,5 +178,4 @@ class CartServices {
         }
     }
 }
-
-module.exports = CartServices
+export default CartServices

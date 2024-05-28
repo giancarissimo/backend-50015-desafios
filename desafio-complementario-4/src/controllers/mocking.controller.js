@@ -1,5 +1,5 @@
-const MockingUtils = require("../utils/mocking.js")
-const mockingUitls = new MockingUtils()
+import MockingUtils from "../utils/mocking.js"
+const mockingUtils = new MockingUtils()
 
 class MockingController {
     async generateProducts(req, res) {
@@ -7,11 +7,10 @@ class MockingController {
         const products = []
 
         for (let i = 0; i < 100; i++) {
-            const productsMock = await mockingUitls.generateProduct()
+            const productsMock = await mockingUtils.generateProduct()
             products.push(productsMock)
         }
         res.json(products)
     }
 }
-
-module.exports = MockingController
+export default MockingController

@@ -1,12 +1,13 @@
-const ProductModel = require("../models/products.model.js")
-const ProductServices = require('../services/productServices.js')
+import ProductModel from "../models/products.model.js"
+import ProductServices from '../services/productServices.js'
+import CustomError from '../services/errors/customError.js'
+import ErrorsInfo from '../services/errors/errorsInfo.js'
+import { errorsCode } from "../services/errors/errorsCode.js"
+import logger from "../utils/logger.js"
+
 const productServices = new ProductServices()
-const CustomError = require('../services/errors/customError.js')
 const customError = new CustomError()
-const ErrorsInfo = require('../services/errors/errorsInfo.js')
 const errorsInfo = new ErrorsInfo()
-const { errorsCode } = require("../services/errors/errorsCode.js")
-const logger = require("../utils/logger.js")
 
 class ProductController {
     async getProducts(req, res) {
@@ -150,5 +151,4 @@ class ProductController {
         }
     }
 }
-
-module.exports = ProductController
+export default ProductController

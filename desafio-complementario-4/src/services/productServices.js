@@ -1,5 +1,5 @@
-const ProductModel = require("../models/products.model.js")
-const logger = require("../utils/logger.js")
+import ProductModel from "../models/products.model.js"
+import logger from "../utils/logger.js"
 
 class ProductServices {
     async addProduct({ title, description, category, price, code, stock, status, thumbnails, owner, forTesting }) {
@@ -105,5 +105,4 @@ class ProductServices {
         return products
     }
 }
-
-module.exports = ProductServices
+export default ProductServices

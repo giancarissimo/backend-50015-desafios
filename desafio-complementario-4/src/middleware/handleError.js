@@ -1,5 +1,5 @@
-const { errorsCode } = require("../services/errors/errorsCode.js")
-const logger = require("../utils/logger.js")
+import { errorsCode } from "../services/errors/errorsCode.js"
+import logger from "../utils/logger.js"
 
 const handleError = (error, req, res, next) => {
     logger.info(error.cause)
@@ -17,5 +17,4 @@ const handleError = (error, req, res, next) => {
             res.send({ status: "error", error: "unknown error", message: error.message, cause: error.cause, code: error.code })
     }
 }
-
-module.exports = handleError
+export default handleError

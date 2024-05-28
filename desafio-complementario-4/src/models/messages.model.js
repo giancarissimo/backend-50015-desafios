@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+import mongoose from "mongoose"
 
 // Se crea el schema y el model de mensajes
 const messageSchema = new mongoose.Schema({
@@ -13,5 +13,4 @@ const messageSchema = new mongoose.Schema({
 })
 
 const MessageModel = mongoose.model("messages", messageSchema)
-
-module.exports = MessageModel
+export default MessageModel

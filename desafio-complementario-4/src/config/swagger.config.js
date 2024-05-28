@@ -1,8 +1,8 @@
-const swaggerJsDoc = require('swagger-jsdoc')
-const swaggerUi = require('swagger-ui-express')
+import swaggerJsDoc from 'swagger-jsdoc'
+import swaggerUi from 'swagger-ui-express'
 
 const swaggerOptions = {
-    definition : {
+    definition: {
         openapi: '3.0.1',
         info: {
             title: 'iStore App Documentation',
@@ -13,4 +13,4 @@ const swaggerOptions = {
 }
 
 const specs = swaggerJsDoc(swaggerOptions)
-module.exports = { swaggerUi, specs }
+export { swaggerUi, specs }

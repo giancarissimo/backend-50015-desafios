@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken')
-const configObject = require("../config/config.js")
+import jwt from 'jsonwebtoken'
+import configObject from "../config/config.js"
 const { secret_cookie_token } = configObject
 
 const checkUserRole = (allowedRoles) => (req, res, next) => {
@@ -11,7 +11,6 @@ const checkUserRole = (allowedRoles) => (req, res, next) => {
                 res.render('notAuthorized')
             } else {
                 const userRole = decoded.user.role
-                // const user = decoded.user
 
                 if (allowedRoles.includes(userRole)) {
                     next()
@@ -24,4 +23,4 @@ const checkUserRole = (allowedRoles) => (req, res, next) => {
         res.render('notAuthorized')
     }
 }
-module.exports = checkUserRole
+export default checkUserRole

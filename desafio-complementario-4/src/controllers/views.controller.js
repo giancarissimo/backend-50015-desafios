@@ -1,10 +1,10 @@
-const ProductModel = require('../models/products.model.js')
-const ProductServices = require('../services/productServices.js')
+import ProductModel from '../models/products.model.js'
+import ProductServices from '../services/productServices.js'
+import CartServices from '../services/cartServices.js'
+import logger from '../utils/logger.js'
+
 const productServices = new ProductServices()
-const CartServices = require('../services/cartServices.js')
 const cartServices = new CartServices()
-const logger = require('../utils/logger.js')
-const { userEmail } = require('../controllers/user.controller.js')
 
 class ViewsController {
     async renderHome(req, res) {
@@ -231,5 +231,4 @@ class ViewsController {
         res.render('register', { title: 'Register' })
     }
 }
-
-module.exports = ViewsController
+export default ViewsController

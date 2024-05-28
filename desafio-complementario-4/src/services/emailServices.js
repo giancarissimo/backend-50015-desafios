@@ -1,5 +1,5 @@
-const nodemailer = require('nodemailer')
-const configObject = require('../config/config.js')
+import nodemailer from 'nodemailer'
+import configObject from '../config/config.js'
 const { email_user, email_pass } = configObject
 
 class EmailServices {
@@ -70,4 +70,4 @@ class EmailServices {
         }
     }
 }
-module.exports = EmailServices
+export default EmailServices

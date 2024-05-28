@@ -1,7 +1,6 @@
 class ErrorsInfo {
-    productIdNotFound({productId}) {
+    productIdNotFound({ productId }) {
         return `***** A product with the id ${productId} was not found. *****`
     }
 }
-
-module.exports = ErrorsInfo
+export default ErrorsInfo

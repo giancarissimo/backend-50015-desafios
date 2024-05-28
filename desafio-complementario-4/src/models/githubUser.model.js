@@ -1,5 +1,6 @@
-const mongoose = require("mongoose")
+import mongoose from "mongoose"
 
+// Se crea el schema y el model de usuarios para github
 const userSchema = mongoose.Schema({
     username: {
         type: String,
@@ -39,5 +40,4 @@ const userSchema = mongoose.Schema({
 })
 
 const GithubserModel = mongoose.model("githubUser", userSchema)
-
-module.exports = GithubserModel
+export default GithubserModel

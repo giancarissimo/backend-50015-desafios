@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
-const configObject = require('./config/config.js')
+import mongoose from 'mongoose'
+import configObject from './config/config.js'
+import logger from './utils/logger.js'
 const { mongo_url } = configObject
-const logger = require('./utils/logger.js')
 
 class DataBase {
     static #instance
@@ -9,7 +9,8 @@ class DataBase {
     constructor() {
         mongoose.connect(mongo_url)
     }
-    static getIntance() {
+
+    static getInstance() {
         if (this.#instance) {
             logger.info('Database connection already exists.')
             return this.#instance
@@ -20,4 +21,5 @@ class DataBase {
     }
 }
 
-module.exports = DataBase.getIntance()
+const dbInstance = DataBase.getInstance()
+export default dbInstance

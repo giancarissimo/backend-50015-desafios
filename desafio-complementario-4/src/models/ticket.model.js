@@ -1,5 +1,6 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
+// Se crea el schema y el model de tickets
 const ticketSchema = new mongoose.Schema({
     code: {
         type: String,
@@ -23,5 +24,4 @@ const ticketSchema = new mongoose.Schema({
 })
 
 const TicketModel = mongoose.model('Ticket', ticketSchema)
-
-module.exports = TicketModel
+export default TicketModel

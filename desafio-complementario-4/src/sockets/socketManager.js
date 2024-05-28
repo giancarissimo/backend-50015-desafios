@@ -1,12 +1,12 @@
-const socket = require("socket.io")
-const ProductServices = require("../services/productServices.js")
+import { Server as socketIo } from 'socket.io'
+import ProductServices from '../services/productServices.js'
+import MessageModel from '../models/messages.model.js'
+import logger from '../utils/logger.js'
 const productServices = new ProductServices()
-const MessageModel = require("../models/messages.model.js")
-const logger = require("../utils/logger.js")
 
 class SocketManager {
     constructor(server) {
-        this.io = socket(server)
+        this.io = new socketIo(server)
         this.initSocketEvents()
     }
 
@@ -25,7 +25,7 @@ class SocketManager {
                 this.io.emit("products", await productServices.getProducts())
             })
 
-            // Se escucha eventos del cliente para actualziar productos
+            // Se escucha eventos del cliente para actualizar productos
             socket.on("updateProduct", async ({ productId, updatedProduct }) => {
                 await productServices.updateProduct(productId, updatedProduct)
                 this.io.emit("products", await productServices.getProducts())
@@ -41,8 +41,8 @@ class SocketManager {
             // Se emite la lista de mensajes al cliente cuando se conecta
             socket.emit("message", await MessageModel.find())
 
-            // Se envian y reciben mensajes en el chat
-            socket.on("message", async data => {
+            // Se envían y reciben mensajes en el chat
+            socket.on("message", async (data) => {
                 // Guardo el mensaje en MongoDB
                 await MessageModel.create(data)
 
@@ -53,4 +53,4 @@ class SocketManager {
         })
     }
 }
-module.exports = SocketManager
+export default SocketManager

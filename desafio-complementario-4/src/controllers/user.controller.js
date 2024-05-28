@@ -1,14 +1,14 @@
-const UserModel = require('../models/user.model.js')
-const passport = require('passport')
-const logger = require('../utils/logger.js')
-const jwt = require('jsonwebtoken')
-const { createHash, isValidPassword } = require('../utils/hashBcrypt.js')
-const configObject = require('../config/config.js')
+import UserModel from '../models/user.model.js'
+import logger from '../utils/logger.js'
+import jwt from 'jsonwebtoken'
+import { createHash, isValidPassword } from '../utils/hashBcrypt.js'
+import configObject from '../config/config.js'
+import CartServices from '../services/cartServices.js'
+import { generateResetToken } from '../utils/password.js'
+import EmailServices from '../services/emailServices.js'
+
 const { secret_cookie_token, admin_username, admin_email, admin_password, admin_data, admin_role } = configObject
-const CartServices = require('../services/cartServices.js')
 const cartServices = new CartServices()
-const { generateResetToken } = require('../utils/password.js')
-const EmailServices = require('../services/emailServices.js')
 const emailServices = new EmailServices()
 
 class UserController {
@@ -341,4 +341,4 @@ class UserController {
         }
     }
 }
-module.exports = UserController
+export default UserController

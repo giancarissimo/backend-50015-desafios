@@ -1,5 +1,6 @@
-const mongoose = require("mongoose")
+import mongoose from "mongoose"
 
+// Se crea el schema y el model de usuarios
 const userSchema = mongoose.Schema({
     username: {
         type: String,
@@ -48,5 +49,4 @@ const userSchema = mongoose.Schema({
 })
 
 const UserModel = mongoose.model("user", userSchema)
-
-module.exports = UserModel
+export default UserModel

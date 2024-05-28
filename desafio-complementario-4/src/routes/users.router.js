@@ -1,7 +1,7 @@
-const express = require('express')
+import express from 'express'
 const router = express.Router()
 
-module.exports = (userController) => {
+export default (userController) => {
     // Ruta POST /api/users/register-validate
     router.post('/register-validate', userController.register_validate)
 

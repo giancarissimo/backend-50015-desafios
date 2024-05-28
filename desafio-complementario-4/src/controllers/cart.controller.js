@@ -1,14 +1,15 @@
-const UserModel = require('../models/user.model')
-const TicketModel = require('../models/ticket.model')
-const CartServices = require('../services/cartServices.js')
-const cartServices = new CartServices()
-const ProductServices = require('../services/productServices.js')
+import UserModel from '../models/user.model.js'
+import ProductServices from '../services/productServices.js'
+import CartServices from '../services/cartServices.js'
+import CartUtils from '../utils/cartUtils.js'
+import EmailServices from '../services/emailServices.js'
+import TicketModel from '../models/ticket.model.js'
+import logger from '../utils/logger.js'
+
 const productServices = new ProductServices()
-const CartUtils = require('../utils/cartUtils.js')
+const cartServices = new CartServices()
 const cartUtils = new CartUtils()
-const EmailServices = require('../services/emailServices.js')
 const emailServices = new EmailServices()
-const logger = require('../utils/logger.js')
 
 class CartController {
     async createCart(req, res) {
@@ -234,5 +235,4 @@ class CartController {
         }
     }
 }
-
-module.exports = CartController
+export default CartController

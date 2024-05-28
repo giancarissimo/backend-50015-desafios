@@ -1,9 +1,9 @@
-const express = require('express')
+import express from 'express'
+import checkUserRole from '../middleware/checkUserRole.js'
+import passport from 'passport'
 const router = express.Router()
-const checkUserRole = require('../middleware/checkUserRole.js')
-const passport = require('passport')
 
-module.exports = (viewsController) => {
+export default (viewsController) => {
     // Ruta para la vista home.handlebars
     router.get('/', viewsController.renderHome)
 

@@ -1,7 +1,7 @@
-const express = require('express')
+import express from 'express'
 const router = express.Router()
 
-module.exports = (cartController) => {
+export default (cartController) => {
     // Ruta POST /api/carts - se crea un nuevo carrito
     router.post('/', cartController.createCart)
 

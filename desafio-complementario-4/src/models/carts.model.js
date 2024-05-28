@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+import mongoose from "mongoose"
 
 // Se crea el schema y el model de carritos
 const cartSchema = new mongoose.Schema({
@@ -23,5 +23,4 @@ cartSchema.pre("findOne", function (next) {
 })
 
 const CartModel = mongoose.model("carts", cartSchema)
-
-module.exports = CartModel
+export default CartModel

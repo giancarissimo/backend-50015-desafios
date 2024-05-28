@@ -1,4 +1,4 @@
-const { faker } = require("@faker-js/faker")
+import { faker } from '@faker-js/faker'
 
 class MockingUtils {
     async generateProduct() {
@@ -13,5 +13,4 @@ class MockingUtils {
         }
     }
 }
-
-module.exports = MockingUtils
+export default MockingUtils

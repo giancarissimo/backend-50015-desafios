@@ -78,7 +78,7 @@
         "code": "CODE6",
         "stock": 20,
         "status": true,
-        "thumbnail": [
+        "thumbnails": [
             "MacBook_Pro.jpg"
         ],
         "owner": "admin"

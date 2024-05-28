@@ -1,5 +1,5 @@
-const dotenv = require('dotenv')
-const program = require('../utils/commander.js')
+import dotenv from 'dotenv'
+import program from '../utils/commander.js'
 
 const { mode } = program.opts()
 
@@ -23,5 +23,4 @@ const configObject = {
     github_client_secret: process.env.GITHUB_CLIENT_SECRET,
     github_callback_url: process.env.GITHUB_CALLBACK_URL,
 }
-
-module.exports = configObject
+export default configObject

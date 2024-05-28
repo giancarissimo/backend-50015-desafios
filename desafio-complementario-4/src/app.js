@@ -1,26 +1,40 @@
-require('./database.js')
-const express = require('express')
-const cookieParser = require('cookie-parser')
-const session = require('express-session')
-const http = require('http')
-const expressHandlebars = require('express-handlebars')
-const ProductController = require('./controllers/product.controller.js')
-const CartController = require('./controllers/cart.controller.js')
-const UserController = require('./controllers/user.controller.js')
-const ViewsController = require('./controllers/views.controller.js')
-const MockingController = require('./controllers/mocking.controller.js')
-const LoggerController = require('./controllers/logger.controller.js')
-const handleError = require('./middleware/handleError.js')
-const handleLogger = require('./middleware/handleLogger.js')
-const logger = require('./utils/logger.js')
-const MongoStore = require('connect-mongo')
-const authMiddleware = require('./middleware/auth.js')
-const { swaggerUi, specs } = require('./config/swagger.config.js');
+import './database.js'
+import express from 'express'
+import cookieParser from 'cookie-parser'
+import session from 'express-session'
+import http from 'http'
+import expressHandlebars from 'express-handlebars'
+import MongoStore from 'connect-mongo'
+import passport from 'passport'
+import { swaggerUi, specs } from './config/swagger.config.js'
+
+import ProductController from './controllers/product.controller.js'
+import CartController from './controllers/cart.controller.js'
+import UserController from './controllers/user.controller.js'
+import ViewsController from './controllers/views.controller.js'
+import MockingController from './controllers/mocking.controller.js'
+import LoggerController from './controllers/logger.controller.js'
+import SocketManager from './sockets/socketManager.js'
+
+import handleError from './middleware/handleError.js'
+import handleLogger from './middleware/handleLogger.js'
+import logger from './utils/logger.js'
+import authMiddleware from './middleware/auth.js'
+import initializePassport from './config/passport.config.js'
+
+// Rutas
+import viewsRouter from './routes/views.router.js'
+import productsRouter from './routes/products.router.js'
+import cartRouter from './routes/cart.router.js'
+import usersRouter from './routes/users.router.js'
+import mockingRouter from './routes/mocking.router.js'
+import loggerRouter from './routes/logger.router.js'
 
 // Variables de entorno
-const configObject = require('./config/config.js')
+import configObject from './config/config.js'
 const { app_port, mongo_url } = configObject
 
+// Servidor
 const app = express()
 const server = http.createServer(app)
 const PORT = app_port
@@ -32,10 +46,6 @@ const userController = new UserController()
 const viewsController = new ViewsController()
 const mockingController = new MockingController()
 const loggerController = new LoggerController()
-
-// Passport
-const passport = require('passport')
-const initializePassport = require('./config/passport.config.js')
 
 // Middlewares
 app.use(handleLogger) // Niveles de errores
@@ -75,12 +85,12 @@ app.use((req, res, next) => {
 })
 
 // Routing
-app.use('/', require('./routes/views.router')(viewsController)) // Rutas de vistas
-app.use('/api/products', require('./routes/products.router')(productController)) // Rutas de productos
-app.use('/api/carts', require('./routes/cart.router')(cartController)) // Rutas de carritos
-app.use('/api/users', require('./routes/users.router')(userController)) // Rutas de usuarios
-app.use('/mockingproducts', require('./routes/mocking.router.js')(mockingController)) // Ruta de productos fake
-app.use('/loggertest', require('./routes/logger.router.js')(loggerController)) // Ruta de testeo de errores
+app.use('/', viewsRouter(viewsController)) // Rutas de vistas
+app.use('/api/products', productsRouter(productController)) // Rutas de productos
+app.use('/api/carts', cartRouter(cartController)) // Rutas de carritos
+app.use('/api/users', usersRouter(userController)) // Rutas de usuarios
+app.use('/mockingproducts', mockingRouter(mockingController)) // Ruta de productos fake
+app.use('/loggertest', loggerRouter(loggerController)) // Ruta de testeo de errores
 app.use(handleError) // Manejo de errores
 app.use('/apidocs', swaggerUi.serve, swaggerUi.setup(specs)) // Ruta de documentación de Api
 
@@ -93,7 +103,6 @@ app.use((req, res, next) => {
 })
 
 // Websockets
-const SocketManager = require('./sockets/socketManager.js')
 new SocketManager(server)
 
 server.listen(PORT, () => {

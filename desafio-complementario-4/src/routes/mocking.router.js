@@ -1,7 +1,7 @@
-const express = require("express")
+import express from 'express'
 const router = express.Router()
 
-module.exports = (mockingController) => {
+export default (mockingController) => {
     // Ruta GET /mockingproducts - se generan 100 productsos de manera aleatoria
     router.get("/", mockingController.generateProducts)
 

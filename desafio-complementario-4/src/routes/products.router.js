@@ -1,7 +1,7 @@
-const express = require("express")
+import express from 'express'
 const router = express.Router()
 
-module.exports = (productController) => {
+export default (productController) => {
     // Ruta GET /api/products - se listan todos los productos con paginación, filtros y ordenamiento
     router.get("/", productController.getProducts)
 

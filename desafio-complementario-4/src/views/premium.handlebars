@@ -1,0 +1,27 @@
+{{>header}}
+<section>
+    <h1>Welcome to Premium section, {{user.username}}!</h1>
+    <span>Here you can post, manage, and update your products on our site!</span>
+    <p style="display: none;" id="userEmail">{{user.email}}</p>
+    <p style="display: none;" id="userRole">{{user.role}}</p>
+    <form id="premium_productForm">
+        <input type="text" id="title" name="title" placeholder="Title" required>
+        <input type="text" id="description" name="description" placeholder="Description" required>
+        <input type="text" id="category" name="category" placeholder="Category" required>
+        <input type="number" id="price" name="price" placeholder="Price" required>
+        <input type="text" id="thumbnails" name="thumbnails" placeholder="Image URL">
+        <input type="text" id="code" name="code" placeholder="Code" required>
+        <input type="number" id="stock" name="stock" placeholder="stock" required>
+        <select id="productStatus" name="status" required>
+            <option value="true">Active</option>
+            <option value="false">Inactive</option>
+        </select>
+        <button type="submit">Add Product</button>
+    </form>
+</section>
+<section class="section_premium_products">
+    <h2>Your Products:</h2>
+    <div id="container_premium"></div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
+<script src="/js/premium-pannel.js"></script>
